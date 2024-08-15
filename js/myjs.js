@@ -1,52 +1,208 @@
-// content.js
-window.onload = function () {
-    // 确定当前的页面是否是小红书主页
+function initExecute() {
     var currentURL = window.location.href;
-    const isXHSHome = currentURL.indexOf('xiaohongshu') > -1;
-
-    if (isXHSHome) {
-        // 如果是小红书页，则在id=app的div中添加一个卡片
-        const id_div = $('#app');
-        const cardHtml = makeCard();
-        id_div.prepend(cardHtml);
-
-        // 在每一个section的最下面添加一个checkBox
-        var checkBox = makeCheckBox();
-        $('a.title').before(checkBox);
-        
-    }
-    $("#analyzeButton").on('click', function () {
-        // 点击卡片时，弹出输入框以获取产品名称
-        var currentURL = window.location.href;
-        if (currentURL.includes('xiaohongshu')) {
-            xhs();
-        } else if (currentURL.includes('douyin')) {
-            douyin();
-        } else if (currentURL.includes('bilibili')) {
-            bilibili();
-        }
-    })
-
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if (message.linkUrl) {
-            // 显示输入框以获取产品名称
-            const productName = prompt("请输入产品名称", "");
-            if (productName !== null) {
-                // 将产品名称和链接URL发送回后台脚本
-                chrome.runtime.sendMessage({productName: productName, linkUrl: message.linkUrl}, (response) => {
-                    if (chrome.runtime.lastError) {
-                        console.error('SendMessage Error:', chrome.runtime.lastError);
-                    } else {
-                        console.log('Response received:', response);
-                        if (response.status === 'success') {
-                            console.log('Operation was successful:', response.data);
-                        } else {
-                            console.error('Operation failed:', response.error);
-                        }
-                    }
-                });
-
+    // 读取保存到本地存储中的token
+    chrome.storage.local.get('token', function (result) {
+        var token = result.token;
+        if (isTokenExpired(token)) {
+            const isXHSHome = currentURL.includes('xiaohongshu');
+            if (isXHSHome) {
+                initXhsExe();
             }
         }
     });
+
 }
+
+function getSelectedLinks(productName) {
+    var checkedInputs = $('input.linkCheck:checked');
+    var selectedLinks = [];
+
+    for (var i = 0; i < checkedInputs.length; i++) {
+        var selectedLink = [];
+        selectedLink.push(productName);
+        selectedLink.push(checkedInputs[i].value);
+        selectedLinks.push(selectedLink);
+    }
+    return selectedLinks;
+}
+
+
+function changeInputValue(element) {
+    var href, currentURL, base_url, $element;
+    currentURL = window.location.href;
+    if (currentURL.includes('xiaohongshu')) {
+        base_url = 'https://www.xiaohongshu.com';
+    } else if (currentURL.includes('douyin')) {
+        base_url = 'https://www.douyin.com';
+    } else if (currentURL.includes('bilibili')) {
+        base_url = 'https://www.bilibili.com';
+    }
+    $element = $(element);
+    if ($element.is(':checked')) {
+        href = $element.closest('section').find('a').attr('href');
+        $element.val(base_url + href);
+    } else {
+        $element.val('');
+    }
+}
+
+function initButtonClick() {
+    // 点击卡片时，弹出输入框以获取产品名称
+    var currentURL = window.location.href;
+    if (currentURL.includes('xiaohongshu')) {
+        makeXhsTitle();
+    } else if (currentURL.includes('douyin')) {
+        douyin();
+    } else if (currentURL.includes('bilibili')) {
+        bilibili();
+    }
+}
+
+function changeAllInputValue(element) {
+    var $element = $(element);
+    var isChecked = $element.is(':checked');
+
+    $('input.linkCheck').each(function () {
+        if ($(this).prop('checked') !== isChecked) {
+            $(this).prop('checked', isChecked).trigger('change');
+        }
+    });
+}
+
+// 监听鼠标滚动事件
+function executeOnScroll(callbackFunction) {
+    let scrollTimeout;
+    const delay = 1; // 滚动停止后重新监听的时间间隔
+
+    // 监听滚动事件
+    window.addEventListener('scroll', onScrollOrWheel);
+    // 监听鼠标滚轮事件
+    window.addEventListener('wheel', onScrollOrWheel);
+
+    function onScrollOrWheel() {
+        // 执行回调函数
+        callbackFunction();
+
+        // 清除之前的计时器
+        clearTimeout(scrollTimeout);
+
+        // 设置新的计时器，在滚动停止后重新监听
+        scrollTimeout = setTimeout(() => {
+            // 滚动停止后的逻辑
+        }, delay);
+    }
+}
+
+// 监听URL变动事件
+function onUrlChange(callbackFunction) {
+    let lastUrl = location.href;
+
+    new MutationObserver(() => {
+        const currentUrl = location.href;
+        if (currentUrl !== lastUrl) {
+            lastUrl = currentUrl;
+            callbackFunction();
+        }
+    }).observe(document, {subtree: true, childList: true});
+}
+
+function analyzeButton() {
+    // 点击卡片时，弹出输入框以获取产品名称
+    var currentURL = window.location.href;
+    if (currentURL.includes('xiaohongshu')) {
+        xhs();
+    } else if (currentURL.includes('douyin')) {
+        douyin();
+    } else if (currentURL.includes('bilibili')) {
+        bilibili();
+    }
+}
+
+function generateHmac(data) {
+    const encoder = new TextEncoder();
+    const keyData = encoder.encode(123456);
+    const dataToSign = encoder.encode(data);
+
+    return crypto.subtle.importKey(
+        "raw",
+        keyData,
+        {name: "HMAC", hash: "SHA-256"},
+        false,
+        ["sign"]
+    ).then(key => {
+        return crypto.subtle.sign("HMAC", key, dataToSign);
+    }).then(signature => {
+        return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('');
+    });
+}
+
+
+function JsonRequest(api, data) {
+    var url = "http://127.0.0.1:5000" + api;
+    return generateHmac(data.your_data_field).then(hmac => {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                headers: {
+                    "X-HMAC": hmac
+                },
+                success: function (response) {
+                    resolve(response);
+                },
+                error: function (xhr, status, error) {
+                    // 尝试解析响应中的 JSON 并提取错误信息
+                    try {
+                        var errorResponse = JSON.parse(xhr.responseText);
+                        reject(errorResponse.message);
+                    } catch (e) {
+                        reject("An error occurred");
+                    }
+                }
+            });
+        });
+    });
+}
+
+
+function isTokenExpired(token) {
+    console.log(token)
+    // 如果token==undefined,则返回false
+    if (token == undefined) {
+        return false;
+    }
+    try {
+        // 解码JWT
+        var decoded = KJUR.jws.JWS.parse(token);
+        var payloadObj = JSON.parse(decoded.payloadPP);
+
+        // 获取当前时间的时间戳
+        var currentTime = Math.floor(Date.now() / 1000);
+        console.log(payloadObj.exp)
+        console.log(currentTime)
+        // 判断令牌是否过期,过期返回false
+        if (payloadObj.exp > currentTime) {
+            console.log("Token is expired");
+            return true;
+        } else {
+            console.log("Token is valid");
+            return false;
+        }
+    } catch (e) {
+        console.error("Invalid token", e);
+        return true;
+    }
+}
+
+
+function reloadCurrentTab() {
+    window.location.reload();
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        if (tabs.length > 0) {
+            chrome.tabs.reload(tabs[0].id);
+        }
+    });
+}
+

@@ -4,9 +4,18 @@
   "version": "1.0.0.1",
   "description": "在小红书、抖音、B站、快手等平台为PR提供约合帮助的工具",
   "permissions": [
+    "storage",
     "contextMenus",
     "activeTab",
-    "scripting"
+    "scripting",
+    "cookies",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.xiaohongshu.com/*",
+    "https://*.xiaohongshu.cn/*",
+    "https://*.sogou.com/*",
+    "https://*.sogou.cn/*"
   ],
   "icons": {
     "16": "images/16.png",
@@ -17,7 +26,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
@@ -29,11 +38,13 @@
       ],
       "js": [
         "js/plugin/jquery.min.js",
+        "js/plugin/jsrsasign-all-min.js",
         "js/xhs.js",
         "js/cardHtml.js",
         "js/douyin.js",
         "js/bili.js",
         "js/sogou.js",
+        "js/content.js",
         "js/myjs.js"
       ],
       "css": [

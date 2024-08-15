@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/plugin/bootstrap.min.css">
+    <title>Get Cookies</title>
+</head>
+<body>
+<div class="col-12" style="width: 200px;">
+    <div class="card">
+        <div class="list-group list-group-flush">
+            <a id="getCookiesButton"
+               class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">保存cookie</a>
+            <a id="loginExeButton"
+               class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">登录</a>
+            <hr class="mb-0">
+            <a id="outExeButton"
+               class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">退出</a>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-blur" id="loginModal">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label required">账号</label>
+                    <input type="text" class="form-control" name="webExeName" placeholder="账号">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">密码</label>
+                    <input type="password" class="form-control" name="webExePassword" placeholder="密码">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </a>
+                <a href="#" class="btn btn-primary ms-auto px-4" data-bs-dismiss="modal" id="submitLogin">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    登录
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/plugin/jquery.min.js"></script>
+<script src="js/plugin/tabler.min.js"></script>
+<script src="js/plugin/jsrsasign-all-min.js"></script>
+<script src="js/xhs.js"></script>
+<script src="js/cardHtml.js"></script>
+<script src="js/douyin.js"></script>
+<script src="js/bili.js"></script>
+<script src="js/sogou.js"></script>
+<script src="js/content.js"></script>
+<script src="js/myjs.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

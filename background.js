@@ -1,18 +1,42 @@
 // 创建上下文菜单项
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
+        id: "selectAllInput",
+        title: "全选",
+        contexts: ["all"]
+    });
+    chrome.contextMenus.create({
         id: "saveLink",
         title: "保存竞品",
         contexts: ["link"]
+    });
+    // 新增保存所有已选链接选项
+    chrome.contextMenus.create({
+        id: "saveAllLinks",
+        title: "保存所有已选链接",
+        contexts: ["all"]
     });
 });
 
 // 监听上下文菜单点击事件
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === "saveLink") {
-        chrome.tabs.sendMessage(tab.id, { linkUrl: info.linkUrl });
+    switch (info.menuItemId) {
+        case "saveLink":
+            chrome.tabs.sendMessage(tab.id, {linkUrl: info.linkUrl});
+            break;
+        case "saveAllLinks":
+            // 调用前端方法，以获取当前所有已选链接
+            chrome.tabs.sendMessage(tab.id, {selectedLinks: true});
+            break;
+        case "initButton":
+            chrome.tabs.sendMessage(tab.id, {initButton: true});
+        case "selectAllInput":
+            chrome.tabs.sendMessage(tab.id, {selectAllInput: true});
+        default:
+            console.warn(`Unhandled menu item: ${info.menuItemId}`);
     }
 });
+
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log('Received message:', message);
@@ -41,6 +65,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
         // 返回 true 以指示我们将在异步操作完成后发送响应
         return true;
+    } else if (message.selectedLinks) {
+        console.log('Received selected links:', message.selectedLinks);
+        return true;
     }
-});
 
+});
