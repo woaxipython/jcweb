@@ -1,0 +1,12 @@
+/* styles.css */
+.custom-header {
+    /*//占据完整的一行*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f4f4f4;
+    z-index: 1000;
+    text-align: center;
+    color: black;
+    padding: 10px 0;
+}
