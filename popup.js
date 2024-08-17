@@ -1,18 +1,20 @@
 $(document).ready(function () {
     $('#getCookiesButton').click(function () {
-        chrome.runtime.sendMessage({action: 'getCookies'}, response => {
-            if (response && response.cookies) {
-                const cookies = response.cookies;
-                cookies.your_data_field = cookies.a1;
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            var activeTab = tabs[0];
+            var url = new URL(activeTab.url);
+            var hostname = url.hostname;
 
-                const cookiesText = JSON.stringify(cookies, null, 2);
-                console.log('Cookies:', cookiesText);
-
-                // 将 cookie 信息发送到服务器
-                var api = "/web_exe_api/get_cookies";
-                JsonRequest(api, cookies)
+            getSpecificCookiesForActiveTab(function (cookiesData) {
+                const data = {
+                    "cookies": cookiesData,
+                    "your_data_field": cookiesData.a1,
+                    "hostname": hostname, // 使用活动选项卡的 hostname
+                }
+                var api = "/web_exe_api/save_cookies";
+                JsonRequest(api, data)
                     .then(function (result) {
-                        if (result.git === "success") {
+                        if (result.status === "success") {
                             alert("保存成功：" + result.message);
                         } else {
                             alert("保存失败：" + result.message);
@@ -21,11 +23,10 @@ $(document).ready(function () {
                     .catch(function (error) {
                         alert("请求失败：" + error);
                     });
-            } else {
-                alert("无法获取 cookies。");
-            }
+            });
         });
     });
+
 
     $("#loginExeButton").on("click", function () {
         $("body").css({

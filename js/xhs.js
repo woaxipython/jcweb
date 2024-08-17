@@ -1,7 +1,6 @@
 function initXhsExe() {
     const url = window.location.href;
     if (url.includes('search_result')) {
-        alert("已经进入到search页面");
         renderXhsComponents();
     } else if (url.includes('explore')) {
         if (url.match(/explore\/[a-zA-Z0-9]+/)) {

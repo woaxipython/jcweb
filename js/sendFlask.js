@@ -23,14 +23,17 @@ function loginFlask(api, data) {
 }
 
 
-function saveLinks(linkLists, cookies, hostname) {
+function saveLink(linkLists, cookies, hostname) {
     const api = "/web_exe_api/save_links";
     const data = {
         "links": linkLists,
         "your_data_field": api,
-        "a1": cookies.a1,
-        "web_session": cookies.web_session,
-        "hostname": hostname
+        "cookies": {
+            "a1": cookies.a1,
+            "web_session": cookies.web_session,
+        },
+        "hostname": hostname,
+
     };
     // 获取a1
     // 将cookie信息发送到服务器

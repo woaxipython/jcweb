@@ -155,7 +155,8 @@ function generateHmac(data) {
 
 
 function JsonRequest(api, data) {
-    var url = "http://127.0.0.1:5000" + api;
+    // var url = "http://127.0.0.1:5000" + api;
+    var url = "http://1.14.138.236:22" + api;
     return generateHmac(data.your_data_field).then(hmac => {
         return new Promise(function (resolve, reject) {
             $.ajax({
@@ -221,7 +222,7 @@ function reloadCurrentTab() {
 }
 
 function isHostAllowed(linkUrl) {
-    const allowedHosts = ['www.xiaohongshu.com', 'anotherallowedhost.com'];
+    const allowedHosts = ['www.xiaohongshu.com', 'www.bilibili.com','www.douyin.com'];
     const url = new URL(linkUrl);
     return allowedHosts.includes(url.hostname);
 }
@@ -234,11 +235,10 @@ function notPrompt(productName) {
     return false;
 }
 
-function makeLink(productName, linkUrl, cookies) {
+function makeLink(productName, linkUrl, cookies,com=true,comment=false,) {
     if (notPrompt(productName)) {
         return;
     }
-
     const url = new URL(linkUrl);
     const hostname = url.hostname;
 
@@ -249,40 +249,15 @@ function makeLink(productName, linkUrl, cookies) {
 
     getChromeStorageValues(["user_name"], function (result) {
         const userName = result.user_name;
-        const linkList = [productName, linkUrl, userName];
-        const linkLists = [linkList];
-        saveLinks(linkLists, cookies, hostname);
-    });
-}
+        const linkInfo = {
+            "productName": productName,
+            "linkUrl": linkUrl,
+            "userName": userName,
+            "com": com,
+            "comment": comment
 
-function makeAllLink(productName, cookies) {
-    const linkURLList = getSelectedLinks();
-    if (notPrompt(productName)) {
-        return;
-    }
-
-    getChromeStorageValues(["user_name"], function (result) {
-        const userName = result.user_name;
-        const linkLists = [];
-        const hostnames = [];
-
-        linkURLList.forEach(linkUrl => {
-            const url = new URL(linkUrl);
-            const hostname = url.hostname;
-
-            if (isHostAllowed(linkUrl)) {
-                linkLists.push([productName, linkUrl, userName]);
-                hostnames.push(hostname);
-            } else {
-                console.warn('The host of the link URL is not allowed:', hostname);
-            }
-        });
-
-        if (linkLists.length > 0) {
-            saveLinks(linkLists, cookies, hostnames);
-        } else {
-            console.warn('No valid links to save.');
         }
+        saveLink(linkInfo, cookies, hostname);
     });
 }
 

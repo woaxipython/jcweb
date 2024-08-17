@@ -15,26 +15,32 @@ window.onload = function () {
 
 // 监听来自背景脚本的消息
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        var productName;
         switch (request.action) {
-            case 'promptProductName':
-                const productName = prompt("请输入产品名称", "");
+            case 'saveLinkCom':
+                productName = prompt("请输入产品名称", "");
                 makeLink(productName, request.linkUrl, request.cookiesData);
                 break;
-            case 'promptProductNameForAllLinks':
-                const productNameForAll = prompt("请输入产品名称", "");
-                makeAllLink(productNameForAll, request.cookiesData);
+            case 'saveLinkComComment':
+                productName = prompt("请输入产品名称", "");
+                makeLink(productName, request.linkUrl, request.cookiesData,com=true,comment=true);
                 break;
-            case 'selectAllInput':
-                toggleCheckAllInput();
+            case 'saveLinkOwn':
+                productName = prompt("请输入产品名称", "");
+                makeLink(productName, request.linkUrl, request.cookiesData,com=false,comment=false);
+                break;
+            case 'saveLinkOwnComment':
+                productName = prompt("请输入产品名称", "");
+                makeLink(productName, request.linkUrl, request.cookiesData,own=false,comment=true);
                 break;
             default:
                 console.warn(`Unhandled action: ${request.action}`);
         }
     });
 
-// 切换全选输入的状态
-    function toggleCheckAllInput() {
-        const checkBox = $('#CheckAllLink');
-        checkBox.prop('checked', !checkBox.prop('checked')).trigger('change');
-    }
+// // 切换全选输入的状态
+//     function toggleCheckAllInput() {
+//         const checkBox = $('#CheckAllLink');
+//         checkBox.prop('checked', !checkBox.prop('checked')).trigger('change');
+//     }
 }

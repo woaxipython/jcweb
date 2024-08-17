@@ -2,14 +2,17 @@ function createContextMenuItems() {
     const documentUrlPatterns = [
         "*://*.xiaohongshu.com/*",
         "*://*.xiaohongshu.cn/*",
-        "*://*.sogou.com/*",
-        "*://*.sogou.cn/*"
+        "*://*.bilibili.com/*",
+        "*://*.bilibili.cn/*",
+        "*://*.douyin.cn/*"
     ];
 
     const menuItems = [
-        {id: "selectAllInput", title: "全选", contexts: ["all"], documentUrlPatterns},
-        {id: "saveLink", title: "保存竞品", contexts: ["link"], documentUrlPatterns},
-        {id: "saveAllLinks", title: "保存所有已选链接", contexts: ["all"], documentUrlPatterns}
+        {id: "saveLinkCom", title: "保存竞品", contexts: ["all"], documentUrlPatterns},
+        {id: "saveLinkComComment", title: "保存竞品-已维护", contexts: ["all"], documentUrlPatterns},
+        {id: "saveLinkOwn", title: "保存自发", contexts: ["all"], documentUrlPatterns},
+        {id: "saveLinkOwnComment", title: "保存自发-已维护", contexts: ["all"], documentUrlPatterns},
+
     ];
 
     menuItems.forEach(item => {
@@ -36,43 +39,43 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // 处理菜单点击事件的本地函数
 function handleMenuClick(menuItemId, linkUrl, tabId) {
-    // 接收到菜单点击事件后，回传到content.js中进行执行，不在这里处理
-    switch (menuItemId) {
-        case "saveLink":
-            getSpecificCookiesForActiveTab(function (cookiesData) {
-                chrome.tabs.sendMessage(tabId, {
-                    action: 'promptProductName',
-                    linkUrl: linkUrl,
-                    cookiesData: cookiesData
-                });
+    const actions = {
+        "saveLinkCom": 'saveLinkCom',
+        "saveLinkComComment": 'saveLinkComComment',
+        "saveLinkOwn": 'saveLinkOwn',
+        "saveLinkOwnComment": 'saveLinkOwnComment'
+    };
+
+    if (actions[menuItemId]) {
+        getSpecificCookiesForActiveTab(function (cookiesData) {
+            chrome.tabs.sendMessage(tabId, {
+                action: actions[menuItemId],
+                linkUrl: linkUrl,
+                cookiesData: cookiesData
             });
-            break;
-        case "saveAllLinks":
-            getSpecificCookiesForActiveTab(function (cookiesData) {
-                chrome.tabs.sendMessage(tabId, {
-                    action: 'promptProductName',
-                    cookiesData: cookiesData
-                });
-            });
-            break;
-        case "selectAllInput":
-            chrome.tabs.sendMessage(tabId, {action: 'selectAllInput'});
-            break;
-        default:
-            console.warn(`Unhandled menu item: ${menuItemId}`);
+        });
+    } else {
+        console.warn(`Unhandled menu item: ${menuItemId}`);
     }
 }
-
-// 在扩展安装时调用创建菜单项的函数
 
 // 监听上下文菜单点击事件
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (tab && tab.id !== undefined) {
-        handleMenuClick(info.menuItemId, info.linkUrl, tab.id);
+        // 获取当前标签页的URL
+        chrome.tabs.get(tab.id, (currentTab) => {
+            if (currentTab && currentTab.url) {
+                handleMenuClick(info.menuItemId, currentTab.url, tab.id);
+            } else {
+                console.warn("Failed to retrieve the current tab URL.");
+            }
+        });
     } else {
         console.warn("Invalid tab or tab ID.");
     }
 });
+
+
 
 // background.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
