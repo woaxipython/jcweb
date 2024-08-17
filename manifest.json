@@ -39,13 +39,14 @@
       "js": [
         "js/plugin/jquery.min.js",
         "js/plugin/jsrsasign-all-min.js",
+        "js/sendFlask.js",
+        "js/myjs.js",
+        "js/content.js",
         "js/xhs.js",
         "js/cardHtml.js",
         "js/douyin.js",
         "js/bili.js",
-        "js/sogou.js",
-        "js/content.js",
-        "js/myjs.js"
+        "js/sogou.js"
       ],
       "css": [
         "css/plugin/bootstrap.min.css",

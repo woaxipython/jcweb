@@ -9,8 +9,26 @@ function initExecute() {
                 initXhsExe();
             }
         }
+        InitListener()
     });
+}
 
+function InitListener() {
+
+    // 添加点击或变动事件
+    $("#initButton").on('click', function () {
+        initButtonClick()
+    });
+    $("#analyzeButton").on('click', function () {
+        analyzeButton()
+    });
+    $('input.linkCheck').change(function () {
+        changeInputValue(this)
+    });
+    $('#CheckAllLink').change(function () {
+        initButtonClick();
+        changeAllInputValue(this)
+    });
 }
 
 function getSelectedLinks(productName) {
@@ -61,7 +79,6 @@ function initButtonClick() {
 function changeAllInputValue(element) {
     var $element = $(element);
     var isChecked = $element.is(':checked');
-
     $('input.linkCheck').each(function () {
         if ($(this).prop('checked') !== isChecked) {
             $(this).prop('checked', isChecked).trigger('change');
@@ -168,7 +185,6 @@ function JsonRequest(api, data) {
 
 
 function isTokenExpired(token) {
-    console.log(token)
     // 如果token==undefined,则返回false
     if (token == undefined) {
         return false;
@@ -180,8 +196,6 @@ function isTokenExpired(token) {
 
         // 获取当前时间的时间戳
         var currentTime = Math.floor(Date.now() / 1000);
-        console.log(payloadObj.exp)
-        console.log(currentTime)
         // 判断令牌是否过期,过期返回false
         if (payloadObj.exp > currentTime) {
             console.log("Token is expired");
@@ -205,4 +219,82 @@ function reloadCurrentTab() {
         }
     });
 }
+
+function isHostAllowed(linkUrl) {
+    const allowedHosts = ['www.xiaohongshu.com', 'anotherallowedhost.com'];
+    const url = new URL(linkUrl);
+    return allowedHosts.includes(url.hostname);
+}
+
+function notPrompt(productName) {
+    if (!productName) {
+        alert('Product name input was cancelled or empty.');
+        return true;
+    }
+    return false;
+}
+
+function makeLink(productName, linkUrl, cookies) {
+    if (notPrompt(productName)) {
+        return;
+    }
+
+    const url = new URL(linkUrl);
+    const hostname = url.hostname;
+
+    if (!isHostAllowed(linkUrl)) {
+        alert('The host of the link URL is not allowed: ' + hostname);
+        return;
+    }
+
+    getChromeStorageValues(["user_name"], function (result) {
+        const userName = result.user_name;
+        const linkList = [productName, linkUrl, userName];
+        const linkLists = [linkList];
+        saveLinks(linkLists, cookies, hostname);
+    });
+}
+
+function makeAllLink(productName, cookies) {
+    const linkURLList = getSelectedLinks();
+    if (notPrompt(productName)) {
+        return;
+    }
+
+    getChromeStorageValues(["user_name"], function (result) {
+        const userName = result.user_name;
+        const linkLists = [];
+        const hostnames = [];
+
+        linkURLList.forEach(linkUrl => {
+            const url = new URL(linkUrl);
+            const hostname = url.hostname;
+
+            if (isHostAllowed(linkUrl)) {
+                linkLists.push([productName, linkUrl, userName]);
+                hostnames.push(hostname);
+            } else {
+                console.warn('The host of the link URL is not allowed:', hostname);
+            }
+        });
+
+        if (linkLists.length > 0) {
+            saveLinks(linkLists, cookies, hostnames);
+        } else {
+            console.warn('No valid links to save.');
+        }
+    });
+}
+
+
+function getChromeStorageValues(keys, callback) {
+    chrome.storage.local.get(keys, function (result) {
+        callback(result);
+    });
+}
+
+
+
+
+
 
