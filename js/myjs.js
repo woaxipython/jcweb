@@ -155,8 +155,11 @@ function generateHmac(data) {
 
 
 function JsonRequest(api, data) {
-    // var url = "http://127.0.0.1:5000" + api;
-    var url = "http://1.14.138.236:22" + api;
+    // var url = "http://1.14.138.236" + api;
+    // var url = "http://1.14.138.236" + api;
+    var url = "https://wanming.site" + api;
+    console.log(url);
+
     return generateHmac(data.your_data_field).then(hmac => {
         return new Promise(function (resolve, reject) {
             $.ajax({
@@ -165,7 +168,10 @@ function JsonRequest(api, data) {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 headers: {
-                    "X-HMAC": hmac
+                    "X-HMAC": hmac,
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    // "Referer": "http://1.14.138.236/"
                 },
                 success: function (response) {
                     resolve(response);
@@ -176,6 +182,7 @@ function JsonRequest(api, data) {
                         var errorResponse = JSON.parse(xhr.responseText);
                         reject(errorResponse.message);
                     } catch (e) {
+                        console.log("An error occurred", xhr);
                         reject("An error occurred");
                     }
                 }
@@ -183,6 +190,7 @@ function JsonRequest(api, data) {
         });
     });
 }
+
 
 
 function isTokenExpired(token) {
