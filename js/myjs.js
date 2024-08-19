@@ -156,8 +156,8 @@ function generateHmac(data) {
 
 function JsonRequest(api, data) {
     // var url = "http://1.14.138.236" + api;
-    // var url = "http://1.14.138.236" + api;
-    var url = "https://wanming.site" + api;
+    var url = "https://1.14.138.236" + api;
+    // var url = "https://wanming.site" + api;
     console.log(url);
 
     return generateHmac(data.your_data_field).then(hmac => {
