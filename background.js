@@ -1,4 +1,4 @@
-function createContextMenuItems() {
+function createContextMenuItems(login = false) {
     const documentUrlPatterns = [
         "*://*.xiaohongshu.com/*",
         "*://*.xiaohongshu.cn/*",
@@ -7,22 +7,23 @@ function createContextMenuItems() {
         "*://*.douyin.cn/*"
     ];
 
-    const menuItems = [
-        {id: "saveLinkCom", title: "保存竞品", contexts: ["all"], documentUrlPatterns},
-        {id: "saveLinkComComment", title: "保存竞品-已维护", contexts: ["all"], documentUrlPatterns},
-        {id: "saveLinkOwn", title: "保存自发", contexts: ["all"], documentUrlPatterns},
-        {id: "saveLinkOwnComment", title: "保存自发-已维护", contexts: ["all"], documentUrlPatterns},
-
+    const menuItems = login ? [
+        {id: "saveLinkCom", title: "保存竞品"},
+        {id: "saveLinkComComment", title: "保存竞品-已维护"},
+        {id: "saveLinkOwn", title: "保存自发"},
+        {id: "saveLinkOwnComment", title: "保存自发-已维护"}
+    ] : [
+        {id: "LoginFirst", title: "请先登录"}
     ];
 
     menuItems.forEach(item => {
-        // 首先尝试删除具有相同 ID 的菜单项
+        item.contexts = ["all"];
+        item.documentUrlPatterns = documentUrlPatterns;
+
         chrome.contextMenus.remove(item.id, () => {
-            // 检查是否有错误
             if (chrome.runtime.lastError) {
                 console.warn(`No existing menu item with id ${item.id} to remove.`);
             }
-            // 删除后创建新的菜单项
             chrome.contextMenus.create(item, () => {
                 if (chrome.runtime.lastError) {
                     console.error(`Error creating menu item: ${chrome.runtime.lastError}`);
@@ -32,9 +33,13 @@ function createContextMenuItems() {
     });
 }
 
-chrome.runtime.onInstalled.addListener(() => {
-    createContextMenuItems();
+chrome.storage.local.get(["user_name"], function (result) {
+    const login = !!result.user_name;
+    chrome.runtime.onInstalled.addListener(() => {
+        createContextMenuItems(login);
+    });
 });
+
 
 
 // 处理菜单点击事件的本地函数
@@ -74,7 +79,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         console.warn("Invalid tab or tab ID.");
     }
 });
-
 
 
 // background.js

@@ -17,6 +17,17 @@
     "https://*.sogou.com/*",
     "https://*.sogou.cn/*"
   ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/16.png",
+        "html/template.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
   "icons": {
     "16": "images/16.png",
     "48": "images/48.png",
@@ -39,14 +50,15 @@
       "js": [
         "js/plugin/jquery.min.js",
         "js/plugin/jsrsasign-all-min.js",
-        "js/sendFlask.js",
-        "js/myjs.js",
         "js/content.js",
-        "js/xhs.js",
-        "js/cardHtml.js",
-        "js/douyin.js",
-        "js/bili.js",
-        "js/sogou.js"
+        "js/edit/sendFlask.js",
+        "js/edit/myjs.js",
+        "js/edit/plat/xhs.js",
+        "js/edit/plat/douyin.js",
+        "js/edit/plat/bili.js",
+        "js/edit/cardHtml.js",
+        "js/edit/RequestAjax.js",
+        "js/edit/API.js"
       ],
       "css": [
         "css/plugin/bootstrap.min.css",

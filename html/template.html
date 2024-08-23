@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--小红书首页的初始化界面-->
+<div class="page" id="jjc_app">
+    <div class="page-wrapper pb-3 border" style="border-radius: 1rem">
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="box">
+                    <header class="navbar navbar-expand-md d-print-none mb-3 border-bottom pb-3">
+                        <div class="container-xl">
+                            <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                                <div class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                                     aria-label="Open user menu" aria-expanded="false" style="max-height: 2rem;">
+                                    <div style="width: 2rem; height: 2rem; overflow: hidden;">
+                                        <a href="http://1.14.138.236" target="_blank">
+                                            <img class="avatar avatar-sm"
+                                                 src="chrome-extension://gddajbflcjmfpmgenphmlejfdkffeeof/images/16.png"
+                                                 alt="Avatar"
+                                                 style="width: 100%; height: 100%; object-fit: cover;">
+                                        </a>
+                                    </div>
+                                    <div class="d-xl-block ps-2">
+                                        <a href="http://1.14.138.236" target="_blank">景查查-冲冲冲!!</a>
+                                        <small class="text-truncate text-muted" style="max-width: 15rem"><p
+                                                class="mt-2 mb-1 small text-secondary" id="say_what"></p>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="navbar-nav flex-row order-md-last">
+                                <div class="nav-item d-none d-md-flex me-3">
+                                    <div class="btn-list">
+                                        <a href="https://github.com/tabler/tabler" class="btn" target="_blank"
+                                           rel="noreferrer">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="icon">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
+                                            </svg>
+                                            Source code
+                                        </a>
+                                        <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank"
+                                           rel="noreferrer">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="icon text-pink">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                                            </svg>
+                                            Sponsor
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0"
+                                       data-bs-toggle="dropdown" aria-label="Open user menu">
+                                            <span class="avatar avatar-sm"
+                                                  style="background-image: url(./static/avatars/002f.jpg)"></span>
+                                        <div class="d-none d-xl-block ps-2">
+                                            <div>Kellie Skingley</div>
+                                            <div class="mt-1 small text-secondary">Teacher</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <header class="navbar-expand-md d-print-none mb-3 border-bottom pb-3">
+                        <div class="navbar">
+                            <div class="container-xl">
+                                <div class="row flex-fill align-items-center">
+                                    <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data border-end">
+                                        <h6 style="font-weight: bold">发布数据：</h6>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data  border-end">
+                                        <h6 style="font-weight: bold">收集数据：</h6>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_collected"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data  border-end">
+                                        <h6 style="font-weight: bold">评论数据：</h6>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_commented"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                        <div><span class="me-3">本月已发布：</span><span class="has_send"> 60</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-auto col-lg-auto justify-content-start align-items-center send_data  border-end">
+                                        <div class="h-100">
+                                            <a class="btn btn-outline-primary analyzeButton" href="./#">
+                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none"></path><path
+                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                                  </span>
+                                                <span class="nav-link-title">
+                                    分析当前页
+                                  </span>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </header>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-check col-auto" id="checkBox">
+    <input type="checkbox" class="form-check-input linkCheck" id="customCheck1">
+    <label class="custom-control-label" for="customCheck1">选择当前图文</label>
+</div>
+<div class="page-wrapper pb-3 border-bottom" id="jjc_xhs_product">
+    <div class="page-header d-print-none">
+        <div class="container-xl mx-0">
+            <div class="row g-2 align-items-center">
+                <div class="col-6">
+                    <h2 class="page-title">
+                        景景查
+                    </h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row-cards">
+                <div class="row align-items-center my-3">
+                    <div class="col-2 col-sm-6 ps-0">
+                        <button class="btn btn-outline-primary form-control initButton" style="">
+                            初始化
+                        </button>
+                    </div>
+                    <div class="col-2 col-sm-6 ps-0">
+                        <button class="btn btn-outline-primary form-control analyzeButton" style="">
+                            分析当前页
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

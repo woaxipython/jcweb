@@ -24,7 +24,6 @@ function loginFlask(api, data) {
 
 
 function saveLink(linkLists, cookies, hostname) {
-    const api = "/web_exe_api/save_links";
     const data = {
         "links": linkLists,
         "your_data_field": api,
@@ -37,7 +36,7 @@ function saveLink(linkLists, cookies, hostname) {
     };
     // 获取a1
     // 将cookie信息发送到服务器
-    JsonRequest(api, data)
+    JsonRequest(OwnFlaskApi.saveLink, data)
         .then(function (result) {
             if (result.status === "success") {
                 alert("保存成功：" + result.message);
@@ -51,4 +50,14 @@ function saveLink(linkLists, cookies, hostname) {
 }
 
 
+function FetchGetRequest(url) {
+    return GetRequestWithoutApi(url)
+        .then(function (data) {
+            return data; // 返回数据
+        })
+        .catch(function (error) {
+            console.error(error);
+            throw error; // 抛出错误以便调用者处理
+        });
+}
 

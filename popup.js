@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#getCookiesButton').click(function () {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             var activeTab = tabs[0];
             var url = new URL(activeTab.url);
             var hostname = url.hostname;
@@ -11,8 +11,7 @@ $(document).ready(function () {
                     "your_data_field": cookiesData.a1,
                     "hostname": hostname, // 使用活动选项卡的 hostname
                 }
-                var api = "/web_exe_api/save_cookies";
-                JsonRequest(api, data)
+                JsonRequest(OwnFlaskApi.saveCookie, data)
                     .then(function (result) {
                         if (result.status === "success") {
                             alert("保存成功：" + result.message);
@@ -43,15 +42,15 @@ $(document).ready(function () {
         });
     });
     $("#outExeButton").on("click", function () {
-        // 点击退出后，将保存在chrome中的token删除
-        chrome.storage.local.remove('token', function () {
+        // 点击退出后，清空Chrome存储中的所有数据
+        chrome.storage.local.clear(function () {
             alert("退出成功");
             reloadCurrentTab();
         });
     });
+
     // 登录到服务器
     $("#submitLogin").on("click", function () {
-        var api = "/web_exe_api/login"
         const username = $('input[name="webExeName"]').val();
         const password = $('input[name="webExePassword"]').val();
         if (!username || !password) {
@@ -63,9 +62,10 @@ $(document).ready(function () {
             "password": password,
             "your_data_field": password
         }
-        loginFlask(api, data)
+        loginFlask(OwnFlaskApi.login, data)
         $("#loginModal").modal('hide');
     });
+
     getChromeStorageValues(['token', 'user_name'], function (result) {
         var token = result.token;
         var userName = result.user_name;
