@@ -10,7 +10,11 @@ function initXhsExe() {
             handleProductPage();
             return;
         }
-        if (url.endsWith('/explore')) {
+        else if (url.endsWith('/explore')) {
+            renderXhsHomePage();
+            return;
+        }
+        else if (url.includes('channel_type')) {
             renderXhsHomePage();
             return;
         }
@@ -78,6 +82,7 @@ function makeXHSProfileBar() {
         getHtmlTemplate('jjc_xhs_product').then(function (html) {
             id_div.prepend(html);
             var url = OuterApi.lizhi
+            initClickEvent();
             FetchGetRequest(url).then(function (data) {
                 $("#say_what").text(data.data.zh + "\n" + data.data.en)
             })

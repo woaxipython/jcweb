@@ -33,9 +33,9 @@
                                 </div>
                             </div>
                             <div class="navbar-nav flex-row order-md-last">
-                                <div class="nav-item d-none d-md-flex me-3">
+                                <div class="nav-item d-none d-md-flex me-3 ">
                                     <div class="btn-list">
-                                        <a href="https://github.com/tabler/tabler" class="btn" target="_blank"
+                                        <a href="https://github.com/tabler/tabler" class="btn d-none" target="_blank"
                                            rel="noreferrer">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -47,7 +47,7 @@
                                             </svg>
                                             Source code
                                         </a>
-                                        <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank"
+                                        <a href="https://github.com/sponsors/codecalm" class="btn d-none" target="_blank"
                                            rel="noreferrer">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="col-sm-auto col-lg-auto justify-content-start align-items-center send_data  border-end">
                                         <div class="mb-3">
-                                            <a class="btn btn-outline-primary analyzeButton">
+                                            <a class="btn btn-outline-primary analyzeButton d-none">
                                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -248,22 +248,93 @@
         <div class="container-xl">
             <div class="row-cards">
                 <div class="row align-items-center my-3">
-                    <div class="col-2 col-sm-6 ps-0">
+                    <div class="col-2 col-sm-6 ps-0 d-none">
                         <button class="btn btn-outline-primary form-control initButton" style="">
                             初始化
                         </button>
                     </div>
                     <div class="col-2 col-sm-6 ps-0">
-                        <button class="btn btn-outline-primary form-control analyzeButton" style="">
-                            分析当前页
-                        </button>
+                        <a class="btn btn-outline-primary form-control" id="showBrandModal">
+                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none"></path><path
+                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                                  </span>
+                            <span class="nav-link-title">
+                                    混淆品牌
+                                  </span>
+                        </a>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-
+    <div class="modal modal-blur fade" id="BrandModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title">混淆品牌</h5>
+                        <small>输入需要混淆的整段文本，返回混淆品牌词后的文本</small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <input type="text" class="form-control ps-0" value="" autocomplete="off"
+                                       name="change_brand_input"
+                                       placeholder="输入需要混淆的文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-link link-danger" id="showFileChangeBrandModal">
+                        批量修改
+                    </button>
+                    <button class="btn btn-primary ms-auto" id = "changeBrand">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        修改品牌文本
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="FileBrandModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content card">
+                <div class="tab-pane active show" id="tabs-pro" role="tabpanel">
+                    <div class="card-body border-top-0">
+                        <div class="col-12 pb-3">
+                            <small>批量混淆品牌词</small>
+                            <form class="dropzone form-control " action="../" autocomplete="off" novalidate="">
+                                <div class="fallback">
+                                    <input name="changeBrandFile" type="file"
+                                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                </div>
+                            </form>
+                            <div class="d-flex mt-2 justify-content-start align-items-center">
+                                <div class="col-auto px-2 ms-auto">
+                                    <span class="btn btn-link" id="InputChangeBrand">下载模板</span>
+                                </div>
+                                <div class="px-2 col-2">
+                                    <button type="button"
+                                            class="btn  btn-primary w-100" id="changeBrandFile">
+                                        提交
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
