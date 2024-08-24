@@ -152,7 +152,31 @@ function getChromeStorageValues(keys, callback) {
 }
 
 
+function showModal(element_id) {
+    // 先关闭之前的所有模态框
+    $('.modal').modal('hide');
+    // 显示模态框
+    var $element = $('#' + element_id);
+    $element.modal('show');
+}
 
+function initClickEvent() {
+    $("#InputChangeBrand").on('click', function () {
+        InputChangeBrand();
+    });
+    $("#changeBrandFile").on('click', function () {
+        changeBrandFile(this);
+    });
+    $("#changeBrand").on('click', function () {
+        changeBrand();
+    });
+    $("#showFileChangeBrandModal").on('click', function () {
+        showModal('FileBrandModal');
+    });
+    $("#showBrandModal").on('click', function () {
+        showModal('BrandModal');
+    });
+}
 
 
 

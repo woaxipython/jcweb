@@ -20,8 +20,13 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "images/16.png",
-        "html/template.html"
+        "src/16.png",
+        "html/template.html",
+        "js/plugin/jquery.min.js",
+        "js/plugin/tabler.min.js",
+        "js/plugin/xlsx.full.min.js",
+        "js/edit/DomFunction.js",
+        "js/content.js"
       ],
       "matches": [
         "<all_urls>"
@@ -49,8 +54,10 @@
       ],
       "js": [
         "js/plugin/jquery.min.js",
-        "js/plugin/jsrsasign-all-min.js",
+        "js/plugin/tabler.min.js",
         "js/content.js",
+        "js/plugin/jsrsasign-all-min.js",
+
         "js/edit/sendFlask.js",
         "js/edit/myjs.js",
         "js/edit/plat/xhs.js",
@@ -58,7 +65,9 @@
         "js/edit/plat/bili.js",
         "js/edit/cardHtml.js",
         "js/edit/RequestAjax.js",
-        "js/edit/API.js"
+        "js/edit/API.js",
+        "js/edit/DomFunction.js",
+        "js/plugin/xlsx.full.min.js"
       ],
       "css": [
         "css/plugin/bootstrap.min.css",

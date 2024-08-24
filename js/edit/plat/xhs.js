@@ -38,6 +38,9 @@ function handleProfilePage() {
     }
 }
 
+
+
+
 function renderXhsHomePage() {
     makeXhsBar();
 }
@@ -47,13 +50,25 @@ function makeXhsBar() {
     if (!id_div.find('#jjc_app').length) {
         getHtmlTemplate('jjc_app').then(function (html) {
             id_div.prepend(html);
-            var url = OuterApi.lizhi
+            getSrcUrl("src/16.png").then(function (src) {
+                $('#logo').attr('src', src)
+                $('#user_avatar').attr('src', src)
+            });
+            getChromeStorageValues(['user_name'], function (result) {
+                var userName = result.user_name;
+                if (!userName) {
+                    $("#user_name").text("未登录");
+                } else {
+                    $("#user_name").text(userName);
+                }
+            });
+            var url = OuterApi.lizhi;
+            initClickEvent();
             FetchGetRequest(url).then(function (data) {
-                $("#say_what").text(data.data.zh + "\n" + data.data.en)
-            })
+                $("#say_what").text(data.data.zh + "\n" + data.data.en);
+            });
         });
     }
-
 }
 
 

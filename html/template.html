@@ -18,7 +18,7 @@
                                      aria-label="Open user menu" aria-expanded="false" style="max-height: 2rem;">
                                     <div style="width: 2rem; height: 2rem; overflow: hidden;">
                                         <a href="http://1.14.138.236" target="_blank">
-                                            <img class="avatar avatar-sm"
+                                            <img class="avatar avatar-sm" id="logo"
                                                  src="chrome-extension://gddajbflcjmfpmgenphmlejfdkffeeof/images/16.png"
                                                  alt="Avatar"
                                                  style="width: 100%; height: 100%; object-fit: cover;">
@@ -61,16 +61,20 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0"
-                                       data-bs-toggle="dropdown" aria-label="Open user menu">
-                                            <span class="avatar avatar-sm"
-                                                  style="background-image: url(./static/avatars/002f.jpg)"></span>
-                                        <div class="d-none d-xl-block ps-2">
-                                            <div>Kellie Skingley</div>
-                                            <div class="mt-1 small text-secondary">Teacher</div>
-                                        </div>
+                                <div class="nav-item dropdown d-flex">
+                                    <a href="#" class="nav-link d-flex lh-1 p-0 text-no-wrap"
+                                       data-bs-toggle="dropdown" aria-label="Open user menu"
+                                       style="width: 2rem; height: 2rem;">
+                                        <img class="avatar avatar-sm" id="user_avatar"
+                                             src="chrome-extension://gddajbflcjmfpmgenphmlejfdkffeeof/images/16.png"
+                                             alt="Avatar"
+                                             style="width: 100%; height: 100%; object-fit: cover;">
                                     </a>
+                                        <div class="d-none d-xl-block ps-2">
+                                            <div  id="user_name">Kellie Skingley</div>
+                                            <div class="small text-secondary">forever young</div>
+                                        </div>
+
                                 </div>
                             </div>
                         </div>
@@ -119,8 +123,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-auto col-lg-auto justify-content-start align-items-center send_data  border-end">
-                                        <div class="h-100">
-                                            <a class="btn btn-outline-primary analyzeButton" href="./#">
+                                        <div class="mb-3">
+                                            <a class="btn btn-outline-primary analyzeButton">
                                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -133,6 +137,20 @@
                                   </span>
                                             </a>
                                         </div>
+                                        <div class="mb-3">
+                                        <a class="btn btn-outline-primary form-control" id="showBrandModal">
+                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none"></path><path
+                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                                  </span>
+                                            <span class="nav-link-title">
+                                    混淆品牌
+                                  </span>
+                                        </a>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -142,6 +160,69 @@
                     </header>
                 </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="BrandModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                    <h5 class="modal-title">混淆品牌</h5>
+                        <small>输入需要混淆的整段文本，返回混淆品牌词后的文本</small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <input type="text" class="form-control ps-0" value="" autocomplete="off"
+                                       name="change_brand_input"
+                                       placeholder="输入需要混淆的文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-link link-danger" id="showFileChangeBrandModal">
+                        批量修改
+                    </button>
+                    <button class="btn btn-primary ms-auto" id = "changeBrand">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        修改品牌文本
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="FileBrandModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content card">
+                <div class="tab-pane active show" id="tabs-pro" role="tabpanel">
+                    <div class="card-body border-top-0">
+                        <div class="col-12 pb-3">
+                            <small>批量混淆品牌词</small>
+                            <form class="dropzone form-control " action="../" autocomplete="off" novalidate="">
+                                <div class="fallback">
+                                    <input name="changeBrandFile" type="file"
+                                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                </div>
+                            </form>
+                            <div class="d-flex mt-2 justify-content-start align-items-center">
+                                <div class="col-auto px-2 ms-auto">
+                                    <span class="btn btn-link" id="InputChangeBrand">下载模板</span>
+                                </div>
+                                <div class="px-2 col-2">
+                                    <button type="button"
+                                            class="btn  btn-primary w-100" id="changeBrandFile">
+                                        提交
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

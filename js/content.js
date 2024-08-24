@@ -34,10 +34,5 @@ window.onload = function () {
     });
 
 
-// // 切换全选输入的状态
-//     function toggleCheckAllInput() {
-//         const checkBox = $('#CheckAllLink');
-//         checkBox.prop('checked', !checkBox.prop('checked')).trigger('change');
-//     }
 }
 

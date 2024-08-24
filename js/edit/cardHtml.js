@@ -16,6 +16,13 @@ function getHtmlTemplate(templateId) {
         });
 }
 
+function getSrcUrl(src) {
+    return new Promise((resolve) => {
+        resolve(chrome.runtime.getURL(src));
+    });
+}
+
+
 function makeXHSProfileCard() {
     return `
     <div class="page-wrapper pb-3 border-bottom" id="jjc_app">
