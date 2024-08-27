@@ -24,6 +24,8 @@ function loginFlask(api, data) {
 
 
 function saveLink(linkLists, cookies, hostname) {
+    // 获取api
+    const api = OwnFlaskApi.saveLink;
     const data = {
         "links": linkLists,
         "your_data_field": api,
@@ -36,7 +38,7 @@ function saveLink(linkLists, cookies, hostname) {
     };
     // 获取a1
     // 将cookie信息发送到服务器
-    JsonRequest(OwnFlaskApi.saveLink, data)
+    JsonRequest(api, data)
         .then(function (result) {
             if (result.status === "success") {
                 alert("保存成功：" + result.message);
