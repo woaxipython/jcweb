@@ -4,6 +4,18 @@
     <option name="conversations">
       <list>
         <Conversation>
+          <option name="createTime" value="1724729429336" />
+          <option name="id" value="b299b8fde7fc467fa5561b1d7c3aa6d4" />
+          <option name="title" value="新对话 2024年8月27日 11:30:29" />
+          <option name="updateTime" value="1724729429336" />
+        </Conversation>
+        <Conversation>
+          <option name="createTime" value="1724722638357" />
+          <option name="id" value="0a00faba9f7745dc80805dac7f4daea1" />
+          <option name="title" value="新对话 2024年8月27日 09:37:18" />
+          <option name="updateTime" value="1724722638357" />
+        </Conversation>
+        <Conversation>
           <option name="createTime" value="1723686291807" />
           <option name="id" value="7a8f8d1d3dd04257840fbbdb58f8e38e" />
           <option name="title" value="新对话 2024年8月15日 09:44:51" />
@@ -70,7 +82,7 @@
                 <option name="codeReferences">
                   <list>
                     <CodeReferencesBean>
-                      <option name="content" value="xsilnv.ifmgrnv.lmRmhgzoovw.zwwOrhgvmvi(() =&gt; {&#10;    xsilnv.xlmgvcgNvmfh.xivzgv({&#10;        rw: &quot;hzevOrmp&quot;,&#10;        grgov: &quot;保存竞品&quot;,&#10;        xlmgvcgh: [&quot;ormp&quot;]&#10;    });&#10;});" />
+                      <option name="content" value="chrome.runtime.onInstalled.addListener(() =&gt; {&#10;    chrome.contextMenus.create({&#10;        id: &quot;saveLink&quot;,&#10;        title: &quot;保存竞品&quot;,&#10;        contexts: [&quot;link&quot;]&#10;    });&#10;});" />
                       <option name="end_line" value="6" />
                       <option name="filename" value="background.js" />
                       <option name="language" value="ECMAScript 6" />
@@ -105,7 +117,7 @@
                 <option name="codeReferences">
                   <list>
                     <CodeReferencesBean>
-                      <option name="content" value="xsilnv.ifmgrnv.lmNvhhztv.zwwOrhgvmvi((nvhhztv, hvmwvi, hvmwIvhklmhv) =&gt; {&#10;    xlmhg kilwfxgMznv = kilnkg(&quot;请输入产品名称&quot;, &quot;&quot;);&#10;    ru (kilwfxgMznv !== mfoo) {&#10;        xsilnv.ifmgrnv.hvmwNvhhztv({ kilwfxgMznv: kilwfxgMznv, ormpFio: nvhhztv.ormpFio });&#10;    }&#10;});&#10;" />
+                      <option name="content" value="chrome.runtime.onMessage.addListener((message, sender, sendResponse) =&gt; {&#10;    const productName = prompt(&quot;请输入产品名称&quot;, &quot;&quot;);&#10;    if (productName !== null) {&#10;        chrome.runtime.sendMessage({ productName: productName, linkUrl: message.linkUrl });&#10;    }&#10;});&#10;" />
                       <option name="end_line" value="53" />
                       <option name="filename" value="myjs.js" />
                       <option name="language" value="ECMAScript 6" />

@@ -3,9 +3,13 @@ window.onload = function () {
     // 初始化执行函数
     initExecute()
     onUrlChange(() => {
-        // 如果URL发生变化，则重新执行initExecute()函数
-        initExecute()
-    })
+        const url = window.location.href;
+        if (url.match(/explore\/[a-zA-Z0-9]+/)) {
+            window.open(window.location.href, '_blank');
+        }
+        // 在新页面打开URL
+
+    });
 
 
 // 监听来自背景脚本的消息

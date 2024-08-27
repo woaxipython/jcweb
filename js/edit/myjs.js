@@ -8,17 +8,9 @@ function initExecute() {
             if (isXHSHome) {
                 initXhsExe();
             }
-            InitListener()
         }
 
     });
-}
-
-function InitListener() {
-    $(".analyzeButton").on('click', function () {
-        analyzeButton()
-    });
-
 }
 
 // 监听URL变动事件
@@ -151,6 +143,17 @@ function getChromeStorageValues(keys, callback) {
     });
 }
 
+function makeComments() {
+// 获取当前页链接
+    var currentURL = window.location.href;
+    if (currentURL.includes('xiaohongshu')) {
+        make_xhs_comments();
+    } else if (currentURL.includes('douyin')) {
+        make_xhs_comments();
+    } else if (currentURL.includes('bilibili')) {
+        make_xhs_comments();
+    }
+}
 
 function showModal(element_id) {
     // 先关闭之前的所有模态框
@@ -176,6 +179,10 @@ function initClickEvent() {
     $("#showBrandModal").on('click', function () {
         showModal('BrandModal');
     });
+    $(".makeComments").on('click',function(){
+        makeComments()
+
+    })
 }
 
 

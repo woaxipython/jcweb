@@ -9,12 +9,10 @@ function initXhsExe() {
         if (url.match(/explore\/[a-zA-Z0-9]+/)) {
             handleProductPage();
             return;
-        }
-        else if (url.endsWith('/explore')) {
+        } else if (url.endsWith('/explore')) {
             renderXhsHomePage();
             return;
-        }
-        else if (url.includes('channel_type')) {
+        } else if (url.includes('channel_type')) {
             renderXhsHomePage();
             return;
         }
@@ -41,8 +39,6 @@ function handleProfilePage() {
         container.after(makeXHSUserCard());
     }
 }
-
-
 
 
 function renderXhsHomePage() {
@@ -78,17 +74,49 @@ function makeXhsBar() {
 
 function makeXHSProfileBar() {
     const id_div = $('.interaction-container');
-    if (!id_div.find('#jjc_xhs_product').length) {
-        getHtmlTemplate('jjc_xhs_product').then(function (html) {
-            id_div.prepend(html);
-            var url = OuterApi.lizhi
-            initClickEvent();
-            FetchGetRequest(url).then(function (data) {
-                $("#say_what").text(data.data.zh + "\n" + data.data.en)
-            })
+
+    // 清除#jjc_xhs_product元素
+    id_div.find('#jjc_xhs_product').remove();
+
+    getHtmlTemplate('jjc_xhs_product').then(function (html) {
+        id_div.prepend(html);
+        console.log("写入了html");
+
+        // 确保#logo在DOM中存在后再设置src
+        getSrcUrl("src/16.png").then(function (src) {
+            const logoElement = $('#logo');
+            if (logoElement.length) {
+                logoElement.attr('src', src);
+            } else {
+                console.error("#logo 元素未找到");
+            }
         });
-    }
+
+        var url = OuterApi.lizhi;
+        initClickEvent();
+        console.log("进行了初始化点击事件");
+
+        FetchGetRequest(url).then(function (data) {
+            console.log("获取了句子");
+            $("#say_what").text(data.data.zh);
+        });
+    });
 }
+
+
+function make_xhs_comments() {
+    var title = $('<title>').text($('#detail-title').text());
+    var content = $('<content>').text($("#detail-desc").text());
+    var article = $('<article>').append(title).append(content).prop('outerHTML');
+
+    var commentTexts = $('.comment-inner-container .content').map(function () {
+        return $(this).text();
+    }).get().join(' ');
+    var comment = $('<comment>').text(commentTexts).prop('outerHTML');
+    var key_word = $('select[name="InsertKeyWord"] option:selected').val();
+    GetAiComment(article, comment, key_word);
+}
+
 
 function xhs() {
     const currentURL = window.location.href;
