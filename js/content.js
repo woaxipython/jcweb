@@ -1,18 +1,28 @@
 // content.js
 window.onload = function () {
     // 初始化执行函数
+    showSelectionIconAndText()
     initExecute()
     onUrlChange(() => {
         const url = window.location.href;
         if (url.match(/explore\/[a-zA-Z0-9]+/)) {
             window.open(window.location.href, '_blank');
         }
-        // 在新页面打开URL
-
     });
 
+    $("body").on("click", "#save_comment", function () {
+        const selectedText = window.getSelection().toString().trim();
+        getChromeStorageValues(["user_name"], function (result) {
+            const userName = result.user_name;
+            if (!userName) {
+                alert('请先登录.');
+                return;
+            }
+            saveHotComment(selectedText, userName);
+        });
+    })
 
-// 监听来自背景脚本的消息
+    // 监听来自背景脚本的消息
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         var productName;
         switch (request.action) {
@@ -36,7 +46,5 @@ window.onload = function () {
                 console.warn(`Unhandled action: ${request.action}`);
         }
     });
-
-
 }
 

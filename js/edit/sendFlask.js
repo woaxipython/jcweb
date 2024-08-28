@@ -63,6 +63,26 @@ function FetchGetRequest(url) {
         });
 }
 
+function saveHotComment(comment,user_name){
+    const api = OwnFlaskApi.saveHotComment;
+    const data = {
+        "comment": comment,
+        "user_name": user_name,
+        "your_data_field": api,
+    };
+    JsonRequest(api, data)
+        .then(function (result) {
+            if (result.status === "success") {
+                alert("保存成功：" + result.message);
+            } else {
+                alert("保存失败：" + result.message);
+            }
+        })
+        .catch(function (error) {
+            alert(error);
+        });
+
+}
 
 function GetAiComment(article, comment, keyword = "万明") {
     // 获取api
@@ -73,14 +93,11 @@ function GetAiComment(article, comment, keyword = "万明") {
         "keyword": $('<keyword>').text(keyword).prop('outerHTML'),
         "your_data_field": api,
     };
-    // 获取a1
-    // 将cookie信息发送到服务器
     JsonRequest(api, data)
         .then(function (result) {
             if (result.status === "success") {
                 var message = result.message;
-                const change = new ChangeBrand();
-                alert(change.change(message));
+                alert(message);
             } else {
                 alert(result.message);
             }
