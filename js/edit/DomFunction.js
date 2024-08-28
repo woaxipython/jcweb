@@ -1,78 +1,42 @@
-
 class ChangeBrand {
     constructor() {
-        this.russianChars = ['Б', 'Г', 'Д', 'З', 'И', 'Л', 'М', 'Н', 'О', 'П', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ъ', 'Ь', 'Э'];
-        this.arabicChars = ['أ', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ي'];
-        this.spanishChars = ['Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', 'á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', 'Ñ'];
-        this.allChars = this.russianChars.concat(this.arabicChars, this.spanishChars);
-    }
-
-    change(inputStr) {
-        const inputStrUpper = inputStr.toUpperCase();
-        let brand, newBrand;
-
-        if (inputStr.includes("万明")) {
-            brand = "万明";
-            newBrand = this.obfuscateStringZh(brand);
-        } else if (inputStr.includes("梦子沫")) {
-            brand = "梦子沫";
-            newBrand = this.obfuscateStringZh(brand);
-        } else if (inputStr.includes("北思沫")) {
-            brand = "北思沫";
-            newBrand = this.obfuscateStringZh(brand);
-        } else if (inputStrUpper.includes("MYDCT")) {
-            brand = "MYDCT";
-            newBrand = this.obfuscateStringEn(brand);
-        } else if (inputStrUpper.includes("VBFG")) {
-            brand = "VBFG";
-            newBrand = this.obfuscateStringEn(brand);
-        } else if (inputStrUpper.includes("PESGE")) {
-            brand = "PESGE";
-            newBrand = this.obfuscateStringEn(brand);
-        } else {
-            brand = "万明";
-            newBrand = this.obfuscateStringZh(brand);
-        }
-        return inputStrUpper.replace(brand, newBrand);
-    }
-
-    obfuscateStringEn(brand) {
-        const charMap = {
-            'A': ['𝐴', '𝑨', 'Ａ', 'А'],
-            'B': ['𝐵', '𝑩', 'Ｂ', 'В'],
-            'C': ['𝐶', '𝑪', 'Ｃ', 'С'],
-            'D': ['𝐷', '𝑫', 'Ｄ'],
-            'E': ['𝐸', '𝑬', 'Ｅ', 'Е'],
-            'F': ['𝐹', '𝑭', 'Ｆ'],
-            'G': ['𝐺', '𝑮', 'Ｇ'],
-            'H': ['𝐻', '𝑯', 'Ｈ'],
-            'I': ['𝐼', '𝑰', 'Ｉ'],
-            'J': ['𝐽', '𝑱', 'Ｊ'],
-            'K': ['𝐾', '𝑲', 'Ｋ'],
-            'L': ['𝐿', '𝑳', 'Ｌ'],
-            'M': ['𝑀', '𝑴', 'Ｍ', 'М'],
-            'N': ['𝑁', '𝑵', 'Ｎ'],
-            'O': ['𝑂', '𝑶', 'Ｏ'],
-            'P': ['𝑃', '𝑷', 'Ｐ', 'Р'],
-            'Q': ['𝑄', '𝑸', 'Ｑ'],
-            'R': ['𝑅', '𝑹', 'Ｒ'],
-            'S': ['𝑆', '𝑺', 'Ｓ'],
-            'T': ['𝑇', '𝑻', 'Ｔ', 'Т'],
-            'U': ['𝑈', '𝑼', 'Ｕ'],
-            'V': ['𝑉', '𝑽', 'Ｖ'],
-            'W': ['𝑊', '𝑾', 'Ｗ'],
-            'X': ['𝑋', '𝑿', 'Ｘ'],
-            'Y': ['𝒴', '𝓨', 'Ｙ', 'У'],
-            'Z': ['𝑍', '𝒁', 'Ｚ']
+        this.chars = {
+            arabic: ['أ', 'ت', 'ث', 'د', 'ذ', 'ر', 'ز', 'ق', 'ل', 'م', 'ن', 'ه', 'و', 'ي'],
+            invisible: ['Í', 'í'],
+            cyrillic: {
+                'A': 'А', 'B': 'В', 'C': 'С', 'D': 'D', 'E': 'Е',
+                'F': 'F', 'G': 'G', 'H': 'Н', 'I': 'И', 'J': 'Ј',
+                'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н', 'O': 'О',
+                'P': 'Р', 'Q': 'Q', 'R': 'R', 'S': 'Ѕ', 'T': 'Т',
+                'U': 'Ц', 'V': 'V', 'W': 'Ш', 'X': 'Х', 'Y': 'Ү', 'Z': 'З',
+                'a': 'а', 'b': 'Ь', 'c': 'с', 'd': 'ԁ', 'e': 'е',
+                'f': 'ғ', 'g': 'ԍ', 'h': 'һ', 'i': 'і', 'j': 'ј',
+                'k': 'қ', 'l': 'ӏ', 'm': 'м', 'n': 'п', 'o': 'о',
+                'p': 'р', 'q': 'ԛ', 'r': 'г', 's': 'ѕ', 't': 'т',
+                'u': 'ц', 'v': 'ѵ', 'w': 'ԝ', 'x': 'х', 'y': 'у', 'z': 'ᴢ'
+            }
         };
-
-        return Array.from(brand).map(char => {
-            const options = charMap[char.toUpperCase()] || [char];
-            return options[Math.floor(Math.random() * options.length)];
-        }).join('');
+        this.allChars = [...this.chars.arabic, ...this.chars.invisible];
     }
 
-    obfuscateStringZh(brand) {
+    replaceWithCyrillic(brand) {
+        const index = Math.floor(Math.random() * brand.length);
+        return Array.from(brand).map((char, i) =>
+            i === index && this.chars.cyrillic[char] ? this.chars.cyrillic[char] : char
+        ).join('');
+    }
+
+
+    obfuscateString(brand, isEnglish = false) {
+        if (isEnglish) {
+            return this.replaceWithCyrillic(brand);
+        } else {
+            return this.insertRandomChar(brand);
+        }
+    }
+
+
+    insertRandomChar(brand) {
         const insertStr = this.allChars[Math.floor(Math.random() * this.allChars.length)];
         let strList = Array.from(brand);
         if (strList.length > 1) {
@@ -81,17 +45,86 @@ class ChangeBrand {
         }
         return strList.join('');
     }
+
+
+    change(inputStr) {
+        const brands = ["梦子沫", "北思沫", "MYDCT", "VBFG", "PESGE"];
+        let outputStr = inputStr;
+        for (let brand of brands) {
+            const regex = new RegExp(brand, 'gi');
+            if (regex.test(outputStr)) {
+                outputStr = outputStr.replace(regex, (match) =>
+                    this.obfuscateString(match, /^[A-Z]+$/.test(brand))
+                );
+            }
+        }
+        return outputStr;
+    }
 }
 
-function changeBrand(){
-    const change = new ChangeBrand();
+function changeBrandFile(element) {
+    handleFileUpload(element, 'changeBrandFile', json => {
+        if (!validateExcelFormat(json, 500, ["序号", "链接", "内容"])) {
+            return false;
+        }
+        if (json.length === 1) {
+            alert("请至少选择一条数据");
+            return false;
+        }
+        if (json.length > 1 && json[0][2] === "") {
+            alert("请选择要替换的文字");
+            return false;
+        }
+        const api = OwnFlaskApi.changeBrandFile;
+        var data = {
+            "data": json,
+            "your_data_field": api,
+        };
+
+
+        JsonRequest(api, data)
+            .then(function (result) {
+                alert(result.message)
+                outExlsx(result.data, '评论内容导出');
+            })
+            .catch(function (error) {
+                alert(error)
+            })
+
+
+        return true;
+    });
+}
+
+
+function changeBrand() {
     const $input = $('input[name="change_brand_input"]')
-    const val = $input.val();
-    if (val.length > 0) {
-        const str = $input.val().toUpperCase();
-        $input.val(change.change(str));
-    }else{
-        alert("请输入要转换的文字");
+    const str = $input.val().toUpperCase();
+
+    if (str.length > 0) {
+        // 获取api
+        const api = OwnFlaskApi.changeBrand;
+        const data = {
+            "brand": str,
+            "your_data_field": api,
+        };
+        // 获取a1
+        // 将cookie信息发送到服务器
+        JsonRequest(api, data)
+            .then(function (result) {
+                if (result.status === "success") {
+                    alert(result.message)
+                    $input.val(result.data);
+                } else {
+                    alert(result.message);
+                }
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+
+    } else {
+        alert("请输入要混淆的内容");
     }
 }
 
@@ -156,28 +189,39 @@ function outExlsx(data, name) {
     XLSX.writeFile(workbook, `${name}.xlsx`);
 }
 
-function changeBrandFile(element) {
-    handleFileUpload(element, 'changeBrandFile', json => {
-        if (!validateExcelFormat(json, 500, ["序号", "链接", "内容"])) {
-            return false;
-        }
 
-        const change = new ChangeBrand();
-        json.forEach((row, index) => {
-            if (index > 0) {
-                row[2] = change.change(row[2]);
-            }
-        });
-
-        outExlsx(json, '评论内容导出');
-        return true;
-    });
+function outputPvcontent(element) {
+    const data = $(element).data('save').contents;
+    outExlsx(data, '图文内容导出');
 }
 
+function InputComPvcontent() {
+    const data = [['时间', '链接', '评论内容']];
+    outExlsx(data, '导入模板');
+}
 
 function InputChangeBrand() {
     const data = [['序号', '链接', '内容']];
     outExlsx(data, '导入模板');
+}
+
+function outputPvcontentSelected(element) {
+    const $element = $(element);
+    const tab = $($element.closest('a').attr('href')).find("tbody");
+    const $checkboxes = tab.find('input[type="checkbox"]:checked');
+
+    if ($checkboxes.length === 0) {
+        alert("请选择要导出的记录");
+        return;
+    }
+
+    const data = [["链接", "标题", "备注信息", "商品", "用户", "导入日期", "笔记状态"]];
+    $checkboxes.each(function () {
+        const data_save = $(this).attr("data-save").split(",");
+        data.push(data_save);
+    });
+
+    outExlsx(data, '图文内容导出');
 }
 
 function readExcelFromFile(file) {
@@ -202,5 +246,24 @@ function readExcelFromFile(file) {
         } else {
             reject(new Error("传入的不是文件对象"));
         }
+    });
+}
+
+function uploadHasCommentFile(element) {
+    handleFileUpload(element, "promotionComFile", json => {
+        if (!validateExcelFormat(json, 200, ["时间", "链接", "评论内容"])) {
+            return false;
+        }
+
+        const formData = new FormData();
+        formData.append('file', JSON.stringify(json));
+        const url = "/promotionCom/FileHasComment";
+
+        FileRequest({formArray: formData, url: url})
+            .then(result => alert(result.message))
+            .catch(error => alert(error))
+            .finally(() => resetButton(button));
+
+        return true;
     });
 }

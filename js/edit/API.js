@@ -11,4 +11,9 @@ const OwnFlaskApi = {
     saveCookie: `${baseUrls.remote}/web_exe_api/save_cookies`,
     saveLink: `${baseUrls.remote}/web_exe_api/save_links`,
     makeAIComment: `${baseUrls.remote}/web_exe_api/make_ai_comment`,
+
+
+    changeBrand: `${baseUrls.remote}/web_exe_api/changeBrand`,
+    changeBrandFile: `${baseUrls.remote}/web_exe_api/changeBrandFile`
+
 };
