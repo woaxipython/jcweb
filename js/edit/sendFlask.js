@@ -1,25 +1,53 @@
 function loginFlask(api, data) {
     JsonRequest(api, data)
-        .then(function (result) {
-            if (result.status === "success") {
-                // 登录成功后保存token和user_name到本地存储
-                chrome.storage.local.set({
-                    user_name: result.user,
-                    token: result.token
-                }, () => {
-                    console.log('user_name and token saved successfully');
-                    alert(`${result.user} 登录成功`);
-                    // 退出成功刷新当前页面，而不是popup页面
-                    reloadCurrentTab();
-                });
+        .then(handleLoginResult)
+        .catch(showError);
+}
 
+function handleLoginResult(result) {
+    if (result.status === "success") {
+        saveUserData(result.user, result.token)
+            .then(() => {
+                alert(`${result.user} 登录成功`);
+                clearContextMenus();
+            });
+    } else {
+        alert(`登录失败：${result.message}`);
+    }
+}
+
+function saveUserData(userName, token) {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.set({user_name: userName, token: token}, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
             } else {
-                alert("登录失败：" + result.message);
+                resolve();
             }
-        })
-        .catch(function (error) {
-            alert(error)
-        })
+        });
+    });
+}
+
+function clearContextMenus() {
+    chrome.contextMenus.removeAll(() => {
+        if (chrome.runtime.lastError) {
+            console.error(`Error removing context menus: ${chrome.runtime.lastError}`);
+        } else {
+            reloadCurrentTab();
+        }
+    });
+}
+
+function reloadCurrentTab() {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        if (tabs[0]) {
+            chrome.tabs.reload(tabs[0].id);
+        }
+    });
+}
+
+function showError(error) {
+    alert(`错误：${error}`);
 }
 
 

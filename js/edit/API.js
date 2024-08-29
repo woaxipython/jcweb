@@ -1,6 +1,6 @@
 const baseUrls = {
-    // remote: "https://1.14.138.236",
-    remote: "http://127.0.0.1:5000",
+    remote: "https://1.14.138.236",
+    // remote: "http://127.0.0.1:5000",
 };
 const OuterApi = {
     "lizhi": 'https://api.vvhan.com/api/dailyEnglish?type=sj'

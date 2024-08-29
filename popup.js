@@ -41,13 +41,30 @@ $(document).ready(function () {
             });
         });
     });
+
     $("#outExeButton").on("click", function () {
         // 点击退出后，清空Chrome存储中的所有数据
         chrome.storage.local.clear(function () {
-            alert("退出成功");
-            reloadCurrentTab();
+            // 清除所有上下文菜单
+            chrome.contextMenus.removeAll(function () {
+                if (chrome.runtime.lastError) {
+                    console.error(`Error removing context menus: ${chrome.runtime.lastError}`);
+                } else {
+                    alert("退出成功");
+                    reloadCurrentTab();
+                }
+            });
         });
     });
+
+    function reloadCurrentTab() {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            if (tabs[0]) {
+                chrome.tabs.reload(tabs[0].id);
+            }
+        });
+    }
+
 
     // 登录到服务器
     $("#submitLogin").on("click", function () {

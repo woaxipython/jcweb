@@ -33,14 +33,27 @@ function createContextMenuItems(login = false) {
     });
 }
 
-chrome.storage.local.get(["user_name"], function (result) {
-    const login = !!result.user_name;
-    chrome.runtime.onInstalled.addListener(() => {
+function updateContextMenu() {
+    chrome.storage.local.get(["user_name"], function (result) {
+        const login = !!result.user_name;
         createContextMenuItems(login);
     });
+}
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === 'local' && changes.user_name) {
+        updateContextMenu();
+    }
 });
 
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete') {
+        updateContextMenu();
+    }
+});
 
+// 初次运行时调用一次以确保上下文菜单的初始状态正确
+updateContextMenu();
 
 // 处理菜单点击事件的本地函数
 function handleMenuClick(menuItemId, linkUrl, tabId) {
