@@ -81,7 +81,6 @@ function makeXHSProfileBar() {
     getHtmlTemplate('jjc_xhs_product').then(function (html) {
         id_div.prepend(html);
         console.log("写入了html");
-
         // 确保#logo在DOM中存在后再设置src
         getSrcUrl("src/16.png").then(function (src) {
             const logoElement = $('#logo');
@@ -91,7 +90,6 @@ function makeXHSProfileBar() {
                 console.error("#logo 元素未找到");
             }
         });
-
         var url = OuterApi.lizhi;
         initClickEvent();
         console.log("进行了初始化点击事件");

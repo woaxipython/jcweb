@@ -14,6 +14,9 @@ const OwnFlaskApi = {
 
 
     changeBrand: `${baseUrls.remote}/web_exe_api/changeBrand`,
-    changeBrandFile: `${baseUrls.remote}/web_exe_api/changeBrandFile`
+    changeBrandFile: `${baseUrls.remote}/web_exe_api/changeBrandFile`,
+
+
+    saveHotComment: `${baseUrls.remote}/web_exe_api/save_hot_comment`,
 
 };

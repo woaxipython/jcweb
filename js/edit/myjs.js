@@ -3,6 +3,7 @@ function initExecute() {
     // 读取保存到本地存储中的token
     getChromeStorageValues(['token'], function (result) {
         var token = result.token;
+        // 调用函数以启用功能
         if (isTokenExpired(token)) {
             const isXHSHome = currentURL.includes('xiaohongshu');
             if (isXHSHome) {
@@ -181,9 +182,32 @@ function initClickEvent() {
     });
     $(".makeComments").on('click',function(){
         makeComments()
-
     })
 }
 
+function showSelectionIconAndText() {
+    let debounceTimer;
+    document.addEventListener('selectionchange', function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const selectedText = window.getSelection().toString().trim();
+            const existingIcons = document.querySelectorAll('#save_comment');
+            existingIcons.forEach(icon => icon.remove());
+            if (selectedText) {
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    const rect = selection.getRangeAt(0).getBoundingClientRect();
+                    getHtmlTemplate('save_comment').then(function (html) {
+                        html.style.position = 'absolute';
+                        html.style.top = `${rect.bottom + window.scrollY}px`;
+                        html.style.left = `${rect.left + window.scrollX}px`;
+                        html.style.zIndex = '1000';
+                        document.body.appendChild(html);
+                    });
+                }
+            }
+        }, 200); // 调整时间间隔为200毫秒
+    });
+}
 
 
