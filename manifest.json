@@ -4,6 +4,7 @@
   "version": "1.0.0.2",
   "description": "在小红书、抖音、B站、快手等平台为PR提供约合帮助的工具",
   "permissions": [
+    "webRequest",
     "storage",
     "contextMenus",
     "activeTab",
@@ -57,7 +58,6 @@
         "js/plugin/tabler.min.js",
         "js/content.js",
         "js/plugin/jsrsasign-all-min.js",
-
         "js/edit/sendFlask.js",
         "js/edit/myjs.js",
         "js/edit/plat/xhs.js",
@@ -72,7 +72,8 @@
       "css": [
         "css/plugin/bootstrap.min.css",
         "css/mystyle.css"
-      ]
+      ],
+      "run_at": "document_end"
     }
   ]
 }

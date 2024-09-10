@@ -101,6 +101,17 @@ function makeXHSProfileBar() {
     });
 }
 
+function observeSugContainer(callback) {
+    setTimeout(() => {
+        const text_list = [];
+        $('.sug-item').each(function () {
+            const text = $(this).text().trim();
+            text_list.push(text);
+        });
+        console.log(text_list); // 输出收集到的文本列表
+        if (callback) callback(text_list);
+    }, 1000); // 延迟1秒
+}
 
 function make_xhs_comments() {
     var title = $('<title>').text($('#detail-title').text());

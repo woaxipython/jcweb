@@ -180,10 +180,11 @@ function initClickEvent() {
     $("#showBrandModal").on('click', function () {
         showModal('BrandModal');
     });
-    $(".makeComments").on('click',function(){
+    $(".makeComments").on('click', function () {
         makeComments()
     })
 }
+
 
 function showSelectionIconAndText() {
     let debounceTimer;

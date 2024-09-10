@@ -79,6 +79,39 @@ function saveLink(linkLists, cookies, hostname) {
         });
 }
 
+function saveSuggestKeyWord(linkUrl) {
+    const url = new URL(linkUrl);
+    const hostname = url.hostname;
+    // 获取api
+    getChromeStorageValues(["user_name"], function (result) {
+        const userName = result.user_name;
+        if (!userName) {
+            console.log("没有登录，不能保存关联词")
+            return;
+        }
+        const api = OwnFlaskApi.saveSuggestKeyWord;
+        observeSugContainer(function (text_list) {
+
+            const data = {
+                "text_list": text_list,
+                "your_data_field": api,
+                "userName": userName,
+                "hostname": hostname
+            }
+            JsonRequest(api, data)
+                .then(function (result) {
+                    console.log(result.message);
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+        });
+
+
+    });
+
+}
+
 
 function FetchGetRequest(url) {
     return GetRequestWithoutApi(url)
