@@ -67,6 +67,12 @@ function makeXhsBar() {
             FetchGetRequest(url).then(function (data) {
                 $("#say_what").text(data.data.zh + "\n" + data.data.en);
             });
+            FetchExeData().then(function (data) {
+                console.log("获取的数据：", data);
+                $("#has_send").text(data.has_send)
+                $("#has_collected_m").text(data.has_collected_m)
+                $("#has_collected_d").text(data.has_collected_d)
+            })
         });
     }
 }
@@ -98,6 +104,11 @@ function makeXHSProfileBar() {
             console.log("获取了句子");
             $("#say_what").text(data.data.zh);
         });
+        // 调用示例
+        FetchExeData().then(function (data) {
+            console.log("获取的数据：", data);
+        })
+
     });
 }
 
