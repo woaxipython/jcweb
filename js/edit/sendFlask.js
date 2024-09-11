@@ -124,6 +124,31 @@ function FetchGetRequest(url) {
         });
 }
 
+function FetchExeData() {
+    return new Promise((resolve, reject) => {
+        getChromeStorageValues(["user_name"], function (result) {
+            const userName = result.user_name;
+            if (!userName) {
+                console.log("没有登录，不能保存关联词");
+                reject("没有登录");
+                return;
+            }
+            const api = OwnFlaskApi.getExeData;
+            const data = {
+                "username": userName,
+                "your_data_field": api,
+            };
+            JsonRequest(api, data)
+                .then(function (result) {
+                    resolve(result); // 返回数据
+                })
+                .catch(function (error) {
+                    alert(error);
+                    reject(error);
+                });
+        });
+    });
+}
 function saveHotComment(comment, user_name) {
     const api = OwnFlaskApi.saveHotComment;
     const data = {

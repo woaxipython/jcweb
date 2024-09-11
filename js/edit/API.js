@@ -12,6 +12,7 @@ const OwnFlaskApi = {
     saveLink: `${baseUrls.remote}/web_exe_api/save_links`,
     saveSuggestKeyWord: `${baseUrls.remote}/web_exe_api/save_suggest_keyword`,
     makeAIComment: `${baseUrls.remote}/web_exe_api/make_ai_comment`,
+    getExeData: `${baseUrls.remote}/web_exe_api/get_exe_data`,
 
 
     changeBrand: `${baseUrls.remote}/web_exe_api/changeBrand`,
