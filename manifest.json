@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "景灿-冲冲冲",
-  "version": "1.0.0.3",
+  "version": "1.0.0.2",
   "description": "在小红书、抖音、B站、快手等平台为PR提供约合帮助的工具",
   "permissions": [
     "webRequest",
