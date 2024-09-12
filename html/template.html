@@ -86,8 +86,15 @@
                                 <div class="row flex-fill align-items-center">
                                     <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data border-end">
                                         <h6 style="font-weight: bold">发布数据：</h6>
-                                        <div><div class="me-3  d-inline-block" style="width:10rem;">本月新增发布：</div>
-                                            <span id="has_send"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">本月新增发布：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_send" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div><div class="me-3  d-inline-block" style="width:10rem;"></div>
                                         </div>
@@ -99,28 +106,62 @@
                                     </div>
                                     <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data  border-end">
                                         <h6 style="font-weight: bold">收集数据：</h6>
-                                        <div><div class="me-3  d-inline-block" style="width:10rem;">本月竞品收集：</div>
-                                            <span id="has_collected_m"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">本月竞品收集：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_collected_m" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div><div class="me-3  d-inline-block" style="width:10rem;">今日竞品收集：</div>
-                                            <span id="has_collected_d"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">今日竞品收集：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_collected_d" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div><div class="me-3  d-inline-block" style="width:10rem;">本月收集热评：</div>
-                                            <span id="has_collected_hotcom_m"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">本月收集热评：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_collected_hotcom_m" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div><div class="me-3  d-inline-block" style="width:10rem;">今日收集热评：</div>
-                                            <span id="has_collected_hotcom_d"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">今日收集热评：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_collected_hotcom_d" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data  border-end">
                                         <h6 style="font-weight: bold">评论数据：</h6>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;">本月评论维护：</div>
-                                            <span id="has_commented_m"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">本月评论维护：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_commented_m" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;">今日评论维护：</div>
-                                            <span id="has_commented_d"></span>
+                                        <div class="row"><div class="me-3  d-inline-block" style="width:10rem;">今日评论维护：</div>
+                                            <div class="col-5 p-0 d-flex align-items-center">
+                                                <div class="progress w-100">
+                                                    <div class="progress-bar" style="width: 31%" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="38% Complete">
+                                                        <span id="has_commented_d" class="progress-data" data-total=""></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div><div class="me-3  d-inline-block" style="width:10rem;"></div>
                                         </div>
