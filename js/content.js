@@ -12,6 +12,7 @@ window.onload = function () {
 
 
     document.body.addEventListener("click", function (event) {
+        console.log(event.target.id);
         if (event.target.id === "save_comment") {
             const selectedText = window.getSelection().toString().trim();
             getChromeStorageValues(["user_name"], function (result) {
@@ -53,8 +54,9 @@ function handleBackgroundMessage(request) {
             productName = prompt("请输入产品名称", "");
             makeLink(productName, request.linkUrl, request.cookiesData, false, true);
             break;
+        case 'saveHasComment':
+            hasComment(request.linkUrl, request.cookiesData);
         case 'executeContentScript':
-            console.log(request.linkUrl)
             if (request.linkUrl.includes(window_link)) {
                 window_link = request.linkUrl;
             } else {

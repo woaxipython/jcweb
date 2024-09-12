@@ -56,6 +56,8 @@
       "js": [
         "js/plugin/jquery.min.js",
         "js/plugin/tabler.min.js",
+        "js/plugin/xlsx.full.min.js",
+        "js/plugin/datatables.min.js",
         "js/content.js",
         "js/plugin/jsrsasign-all-min.js",
         "js/edit/sendFlask.js",
@@ -66,8 +68,7 @@
         "js/edit/cardHtml.js",
         "js/edit/RequestAjax.js",
         "js/edit/API.js",
-        "js/edit/DomFunction.js",
-        "js/plugin/xlsx.full.min.js"
+        "js/edit/DomFunction.js"
       ],
       "css": [
         "css/plugin/bootstrap.min.css",

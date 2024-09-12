@@ -8,6 +8,7 @@ function createContextMenuItems(login = false) {
     ];
 
     const menuItems = login ? [
+        {id: "saveHasComment", title: "已水"},
         {id: "saveLinkCom", title: "保存竞品"},
         {id: "saveLinkComComment", title: "保存竞品-已维护"},
         {id: "saveLinkOwn", title: "保存自发"},
@@ -58,6 +59,7 @@ updateContextMenu();
 // 处理菜单点击事件的本地函数
 function handleMenuClick(menuItemId, linkUrl, tabId) {
     const actions = {
+        "saveHasComment": 'saveHasComment',
         "saveLinkCom": 'saveLinkCom',
         "saveLinkComComment": 'saveLinkComComment',
         "saveLinkOwn": 'saveLinkOwn',

@@ -69,11 +69,16 @@ function makeXhsBar() {
             });
             FetchExeData().then(function (data) {
                 console.log("获取的数据：", data);
-                $("#has_send").text(data.has_send)
-                $("#has_collected_m").text(data.has_collected_m)
-                $("#has_collected_d").text(data.has_collected_d)
-                $("#has_collected_hotcom_m").text(data.has_collected_hotcom_m)
-                $("#has_collected_hotcom_d").text(data.has_collected_hotcom_d)
+                $("#has_send").text(data.has_send[0])
+                ChangeProgress("#has_send", data.has_send[2]);
+                $("#has_collected_m").text(data.has_collected_m[0])
+                ChangeProgress("#has_collected_m", data.has_collected_m[2]);
+                $("#has_collected_d").text(data.has_collected_d[0])
+                ChangeProgress("#has_collected_d", data.has_collected_d[2]);
+                $("#has_collected_hotcom_m").text(data.has_collected_hotcom_m[0])
+                ChangeProgress("#has_collected_hotcom_m", data.has_collected_hotcom_m[2]);
+                $("#has_collected_hotcom_d").text(data.has_collected_hotcom_d[0])
+                ChangeProgress("#has_collected_hotcom_d", data.has_collected_hotcom_d[2]);
             })
         });
     }
