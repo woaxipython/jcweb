@@ -72,6 +72,7 @@
       ],
       "css": [
         "css/plugin/bootstrap.min.css",
+        "css/plugin/datatables.min.css",
         "css/mystyle.css"
       ],
       "run_at": "document_end"

@@ -1,6 +1,6 @@
 const baseUrls = {
-    remote: "https://wanming.site",
-    // remote: "http://127.0.0.1:5000",
+    // remote: "https://wanming.site",
+    remote: "http://127.0.0.1:5000",
 };
 const OuterApi = {
     "lizhi": 'https://api.vvhan.com/api/dailyEnglish?type=sj'
@@ -16,6 +16,7 @@ const OwnFlaskApi = {
     getExeData: `${baseUrls.remote}/web_exe_api/get_exe_data`,
 
     boomtable: `${baseUrls.remote}/web_exe_api/boomtable`,
+    RecentTable: `${baseUrls.remote}/web_exe_api/recentTable`,
 
     changeBrand: `${baseUrls.remote}/web_exe_api/changeBrand`,
     changeBrandFile: `${baseUrls.remote}/web_exe_api/changeBrandFile`,

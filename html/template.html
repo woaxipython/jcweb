@@ -200,22 +200,31 @@
                                             <div class="me-3  d-inline-block" style="width:10rem;"></div>
                                         </div>
                                     </div>
-                                    <div class="col-auto mb-3">
+                                    <div class="col-sm-6 col-lg-3 mb-3">
                                         <div class="row justify-content-start">
                                             <div class="col-12">
-                                                <a class="btn btn-outline-primary me-1" id="showBrandModal">
+                                                <a class="btn btn-outline-primary form-control mb-2" id="showBrandModal">
                                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                                   </span>
                                                     <span class="nav-link-title">
                                     混淆品牌
                                   </span>
                                                 </a>
-                                                <a class="btn btn-outline-primary  d-inline-block" id="showBoomTable">
+                                                <div class="d-flex">
+                                                <a class="btn btn-outline-primary  d-inline-block col-6" id="showBoomTable">
                                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                                   </span>
                                                     <span class="nav-link-title">
                                     潜在爆文
                                   </span>
+                                                </a>
+                                                <a class="btn btn-outline-primary  d-inline-block col-6" id="showRecentTable">
+                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                  </span>
+                                                    <span class="nav-link-title">
+                                    最近自发
+                                  </span>
+
                                                 </a>
                                             </div>
                                         </div>
@@ -298,7 +307,7 @@
     <div class="modal modal-blur" id="boom_pv_modal">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content tab-pane">
-                <div class="alert alert-black alert-dismissible  mb-0" role="alert">
+                <div class="alert alert-black mb-0" role="alert">
                     <h3 class="mb-1">潜在爆文</h3>
                     <p>下列为最近15天发布200赞以上，具有爆文潜力的图文，请做好维护！</p>
                     <hr class="mb-1">
@@ -306,7 +315,7 @@
                     <div class="table-responsive">
                         <table class="table card-table table-vcenter text-nowrap datatable"
                                id="BoomTable">
-                            <thead class="sticky-top">
+                            <thead>
                             <tr>
                                 <th>标题</th>
                                 <th>点赞</th>
@@ -317,6 +326,43 @@
                                     <div class="d-flex justify-content-center">平台</div>
                                 </th>
                                 <th>发布时间</th>
+                                <th>导入时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur" id="recent_pv_modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered " role="document">
+            <div class="modal-content tab-pane">
+                <div class="alert alert-black mb-0" role="alert">
+                    <h3 class="mb-1">最近导入</h3>
+                    <p>下列为最近7天导入到网站的图文，有些数据预计24小时内更新</p>
+                    <hr class="mb-1">
+
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap datatable"
+                               id="RecentTable">
+                            <thead>
+                            <tr>
+                                <th>标题</th>
+                                <th>点赞</th>
+                                <th>评论</th>
+                                <th>产品</th>
+                                <th>所属PR</th>
+                                <th>
+                                    <div class="d-flex justify-content-center">平台</div>
+                                </th>
+                                <th>发布时间</th>
+                                <th>导入时间</th>
+
                             </tr>
                             </thead>
                             <tbody>
