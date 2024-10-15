@@ -107,7 +107,7 @@ function notPrompt(productName) {
     return false;
 }
 
-function makeLink(productName, linkUrl, cookies, com = true, comment = false,) {
+function makeLink(productName, linkUrl, cookies, com = true, comment = false, settop = false) {
     if (notPrompt(productName)) {
         return;
     }
@@ -130,36 +130,12 @@ function makeLink(productName, linkUrl, cookies, com = true, comment = false,) {
             "linkUrl": linkUrl,
             "userName": userName,
             "com": com,
-            "comment": comment
-
+            "comment": comment,
+            "settop": settop
         }
         saveLink(linkInfo, cookies, hostname);
     });
 }
-
-function hasComment(linkUrl, cookies) {
-    const url = new URL(linkUrl);
-    const hostname = url.hostname;
-
-    if (!isHostAllowed(linkUrl)) {
-        alert('The host of the link URL is not allowed: ' + hostname);
-        return;
-    }
-
-    getChromeStorageValues(["user_name"], function (result) {
-        const userName = result.user_name;
-        if (!userName) {
-            alert('请先登录.');
-            return;
-        }
-        const linkInfo = {
-            "linkUrl": linkUrl,
-            "userName": userName,
-        }
-        saveComment(linkInfo, cookies, hostname);
-    });
-}
-
 
 function getChromeStorageValues(keys, callback) {
     chrome.storage.local.get(keys, function (result) {
@@ -272,12 +248,13 @@ function makeBoomTable() {
         });
 
 
-        InitDataTable("BoomTable",[2])
+        InitDataTable("BoomTable", [2])
         // 显示模态框
         $("#boom_pv_modal").modal('show');
 
     });
 }
+
 function showRecentTable() {
     const url = window.location.href;
     const hostname = new URL(url).hostname;
@@ -307,13 +284,14 @@ function showRecentTable() {
         $(function () {
             $('[data-bs-toggle="popover"]').popover();
         });
-        InitDataTable("RecentTable",[2])
+        InitDataTable("RecentTable", [2])
         // 显示模态框
         $("#recent_pv_modal").modal('show');
 
     });
 }
-function writePromotionTable(tableBody,tableData){
+
+function writePromotionTable(tableBody, tableData) {
     // 遍历数据并生成表格行
     tableData.forEach(function (rowData) {
         const row = $("<tr></tr>");
@@ -400,11 +378,12 @@ function writePromotionTable(tableBody,tableData){
     });
 
 }
-function InitDataTable(tableId,order_list){
+
+function InitDataTable(tableId, order_list) {
     var order = []
-    var tableID = "#"+tableId;
+    var tableID = "#" + tableId;
     $.each(order_list, function (value) {
-       order.push([value,'desc'])
+        order.push([value, 'desc'])
     });
 
     if ($.fn.DataTable.isDataTable(tableID)) {
