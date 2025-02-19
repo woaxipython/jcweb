@@ -1,68 +1,4 @@
-function changeBrandFile(element) {
-    handleFileUpload(element, 'changeBrandFile', json => {
-        if (!validateExcelFormat(json, 500, ["序号", "链接", "内容"])) {
-            return false;
-        }
-        if (json.length === 1) {
-            alert("请至少选择一条数据");
-            return false;
-        }
-        if (json.length > 1 && json[0][2] === "") {
-            alert("请选择要替换的文字");
-            return false;
-        }
-        const api = OwnFlaskApi.changeBrandFile;
-        var data = {
-            "data": json,
-            "your_data_field": api,
-        };
 
-
-        JsonRequest(api, data)
-            .then(function (result) {
-                alert(result.message)
-                outExlsx(result.data, '评论内容导出');
-            })
-            .catch(function (error) {
-                alert(error)
-            })
-
-
-        return true;
-    });
-}
-
-
-function changeBrand() {
-    const $input = $('input[name="change_brand_input"]')
-    const str = $input.val().toUpperCase();
-
-    if (str.length > 0) {
-        // 获取api
-        const api = OwnFlaskApi.changeBrand;
-        const data = {
-            "brand": str,
-            "your_data_field": api,
-        };
-        // 获取a1
-        // 将cookie信息发送到服务器
-        JsonRequest(api, data)
-            .then(function (result) {
-                if (result.status === "success") {
-                    alert(result.message)
-                    $input.val(result.data);
-                } else {
-                    alert(result.message);
-                }
-            })
-            .catch(function (error) {
-                alert(error);
-            });
-
-    } else {
-        alert("请输入要混淆的内容");
-    }
-}
 
 function handleFileUpload(element, inputName, callback) {
     const fileInput = $(`input[name="${inputName}"]`)[0];
@@ -126,10 +62,6 @@ function outExlsx(data, name) {
 }
 
 
-function InputChangeBrand() {
-    const data = [['序号', '链接', '内容']];
-    outExlsx(data, '导入模板');
-}
 
 function readExcelFromFile(file) {
     return new Promise((resolve, reject) => {

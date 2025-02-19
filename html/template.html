@@ -33,35 +33,6 @@
                                 </div>
                             </div>
                             <div class="navbar-nav flex-row order-md-last">
-                                <!--                                <div class="nav-item d-none d-md-flex me-3 ">-->
-                                <!--                                    <div class="btn-list">-->
-                                <!--                                        <a href="https://github.com/tabler/tabler" class="btn d-none" target="_blank"-->
-                                <!--                                           rel="noreferrer">-->
-                                <!--                                            &lt;!&ndash; Download SVG icon from http://tabler-icons.io/i/brand-github &ndash;&gt;-->
-                                <!--                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"-->
-                                <!--                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"-->
-                                <!--                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-                                <!--                                                 class="icon">-->
-                                <!--                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>-->
-                                <!--                                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>-->
-                                <!--                                            </svg>-->
-                                <!--                                            Source code-->
-                                <!--                                        </a>-->
-                                <!--                                        <a href="https://github.com/sponsors/codecalm" class="btn d-none"-->
-                                <!--                                           target="_blank"-->
-                                <!--                                           rel="noreferrer">-->
-                                <!--                                            &lt;!&ndash; Download SVG icon from http://tabler-icons.io/i/heart &ndash;&gt;-->
-                                <!--                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"-->
-                                <!--                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"-->
-                                <!--                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-                                <!--                                                 class="icon text-pink">-->
-                                <!--                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>-->
-                                <!--                                                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>-->
-                                <!--                                            </svg>-->
-                                <!--                                            Sponsor-->
-                                <!--                                        </a>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
                                 <div class="nav-item dropdown d-flex">
                                     <a href="#" class="nav-link d-flex lh-1 p-0 text-no-wrap"
                                        data-bs-toggle="dropdown" aria-label="Open user menu"
@@ -83,224 +54,28 @@
                     <header class="navbar-expand-md d-print-none pb-3">
                         <div class="navbar">
                             <div class="container-xl">
-                                <div class="row flex-fill">
-                                    <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data border-end">
-                                        <h6 style="font-weight: bold">发布数据：</h6>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">本月新增发布：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_send" class="progress-data" data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;"></div>
-                                        </div>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;"></div>
-                                        </div>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;"></div>
-                                        </div>
-
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <a class="btn btn-outline-primary"
+                                           id="showBoomTable">
+                                            潜在爆文
+                                        </a>
                                     </div>
-                                    <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data  border-end">
-                                        <h6 style="font-weight: bold">收集数据：</h6>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">本月竞品收集：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_collected_m" class="progress-data"
-                                                              data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">今日竞品收集：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_collected_d" class="progress-data"
-                                                              data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">本月收集热评：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_collected_hotcom_m" class="progress-data"
-                                                              data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">今日收集热评：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_collected_hotcom_d" class="progress-data"
-                                                              data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3 justify-content-start align-items-center send_data  border-end">
-                                        <h6 style="font-weight: bold">评论数据：</h6>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">本月评论维护：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_commented_m" class="progress-data"
-                                                              data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="me-3  d-inline-block" style="width:10rem;">今日评论维护：</div>
-                                            <div class="col-5 p-0 d-flex align-items-center">
-                                                <div class="progress w-100">
-                                                    <div class="progress-bar" style="width: 10%" role="progressbar"
-                                                         aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                                         aria-label="38% Complete">
-                                                        <span id="has_commented_d" class="progress-data"
-                                                              data-total=""></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;"></div>
-                                        </div>
-                                        <div>
-                                            <div class="me-3  d-inline-block" style="width:10rem;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3 mb-3">
-                                        <div class="row justify-content-start">
-                                            <div class="col-12">
-                                                <a class="btn btn-outline-primary form-control mb-2" id="showBrandModal">
-                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                  </span>
-                                                    <span class="nav-link-title">
-                                    混淆品牌
-                                  </span>
-                                                </a>
-                                                <div class="d-flex">
-                                                <a class="btn btn-outline-primary  d-inline-block col-6" id="showBoomTable">
-                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                  </span>
-                                                    <span class="nav-link-title">
-                                    潜在爆文
-                                  </span>
-                                                </a>
-                                                <a class="btn btn-outline-primary  d-inline-block col-6" id="showRecentTable">
-                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                  </span>
-                                                    <span class="nav-link-title">
-                                    最近自发
-                                  </span>
+                                    <div class="col-auto">
+                                        <a class="btn btn-outline-primary"
+                                           id="showRecentTable">
+                                            最近自发
 
-                                                </a>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
 
-                                    <!--                                    </div>-->
+
                                 </div>
                             </div>
-                        </div>
 
                     </header>
                 </div>
 
-            </div>
-        </div>
-    </div>
-    <div class="modal modal-blur fade" id="BrandModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title">混淆品牌</h5>
-                        <small>输入需要混淆的整段文本，返回混淆品牌词后的文本</small>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control ps-0" value="" autocomplete="off"
-                                       name="change_brand_input"
-                                       placeholder="输入需要混淆的文本">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-link link-danger" id="showFileChangeBrandModal">
-                        批量修改
-                    </button>
-                    <button class="btn btn-primary ms-auto" id="changeBrand">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        修改品牌文本
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal modal-blur fade" id="FileBrandModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content card">
-                <div class="tab-pane active show" id="tabs-pro" role="tabpanel">
-                    <div class="card-body border-top-0">
-                        <div class="col-12 pb-3">
-                            <small>批量混淆品牌词</small>
-                            <form class="dropzone form-control " action="../" autocomplete="off" novalidate="">
-                                <div class="fallback">
-                                    <input name="changeBrandFile" type="file"
-                                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                                </div>
-                            </form>
-                            <div class="d-flex mt-2 justify-content-start align-items-center">
-                                <div class="col-auto px-2 ms-auto">
-                                    <span class="btn btn-link" id="InputChangeBrand">下载模板</span>
-                                </div>
-                                <div class="px-2 col-2">
-                                    <button type="button"
-                                            class="btn  btn-primary w-100" id="changeBrandFile">
-                                        提交
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -408,26 +183,11 @@
                             </div>
                         </div>
                     </header>
-                    <header class="navbar-expand-md d-print-none mb-3 border-bottom pb-3">
+                    <header class="navbar-expand-md d-print-none">
                         <div class="navbar">
-                            <div class="container-xl">
-                                <div class="row flex-fill align-items-center">
-                                    <div class="col-sm-auto col-lg-auto justify-content-start align-items-center send_data  border-end">
-                                        <a class="btn btn-outline-primary form-control" id="showBrandModal">
-                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z"
-                                                                                    fill="none"></path><path
-                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
-                                  </span>
-                                            <span class="nav-link-title">
-                                    混淆品牌
-                                  </span>
-                                        </a>
-
-                                    </div>
-                                    <div class="col-sm-auto col-lg-auto justify-content-start align-items-center d-flex border-end">
+                            <div class="container-xl  border-bottom pb-3 ">
+                                <div class="row">
+                                    <div class="col-sm-auto col-lg-auto justify-content-start align-items-center d-flex">
                                         <select name="InsertKeyWord"
                                                 class="form-select form-control btn-outline-primary me-1">
                                             <option value="万明">万明</option>
@@ -438,85 +198,83 @@
                                             <option value="MYDCT">MYDCT胶水</option>
                                         </select>
                                         <a class="btn btn-outline-primary form-control makeComments">
-                                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z"
-                                                                                    fill="none"></path><path
-                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
-                                  </span>
-                                            <span class="nav-link-title">
-                                    生成评论
-                                  </span>
+                                            生成评论
                                         </a>
 
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                    </header>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="modal modal-blur fade" id="BrandModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title">混淆品牌</h5>
-                        <small>输入需要混淆的整段文本，返回混淆品牌词后的文本</small>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control ps-0" value="" autocomplete="off"
-                                       name="change_brand_input"
-                                       placeholder="输入需要混淆的文本">
+                            <div class="container-xl pt-3 ">
+                                <div class="row">
+                                    <small class="text-truncate" style="max-width: 15rem"><a
+                                            class="mt-2 mb-1 cursor-pointer" target="_blank" id="has_promotion_a"></a>
+                                    </small>
+                                </div>
                             </div>
                         </div>
+                </div>
+
+                </header>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-blur fade" id="BrandModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title">混淆品牌</h5>
+                    <small>输入需要混淆的整段文本，返回混淆品牌词后的文本</small>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <input type="text" class="form-control ps-0" value="" autocomplete="off"
+                                   name="change_brand_input"
+                                   placeholder="输入需要混淆的文本">
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-link link-danger" id="showFileChangeBrandModal">
-                        批量修改
-                    </button>
-                    <button class="btn btn-primary ms-auto" id="changeBrand">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        修改品牌文本
-                    </button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-link link-danger" id="showFileChangeBrandModal">
+                    批量修改
+                </button>
+                <button class="btn btn-primary ms-auto" id="changeBrand">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    修改品牌文本
+                </button>
             </div>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="FileBrandModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content card">
-                <div class="tab-pane active show" id="tabs-pro" role="tabpanel">
-                    <div class="card-body border-top-0">
-                        <div class="col-12 pb-3">
-                            <small>批量混淆品牌词</small>
-                            <form class="dropzone form-control " action="../" autocomplete="off" novalidate="">
-                                <div class="fallback">
-                                    <input name="changeBrandFile" type="file"
-                                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                                </div>
-                            </form>
-                            <div class="d-flex mt-2 justify-content-start align-items-center">
-                                <div class="col-auto px-2 ms-auto">
-                                    <span class="btn btn-link" id="InputChangeBrand">下载模板</span>
-                                </div>
-                                <div class="px-2 col-2">
-                                    <button type="button"
-                                            class="btn  btn-primary w-100" id="changeBrandFile">
-                                        提交
-                                    </button>
-                                </div>
+</div>
+<div class="modal modal-blur fade" id="FileBrandModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content card">
+            <div class="tab-pane active show" id="tabs-pro" role="tabpanel">
+                <div class="card-body border-top-0">
+                    <div class="col-12 pb-3">
+                        <small>批量混淆品牌词</small>
+                        <form class="dropzone form-control " action="../" autocomplete="off" novalidate="">
+                            <div class="fallback">
+                                <input name="changeBrandFile" type="file"
+                                       accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                            </div>
+                        </form>
+                        <div class="d-flex mt-2 justify-content-start align-items-center">
+                            <div class="col-auto px-2 ms-auto">
+                                <span class="btn btn-link" id="InputChangeBrand">下载模板</span>
+                            </div>
+                            <div class="px-2 col-2">
+                                <button type="button"
+                                        class="btn  btn-primary w-100" id="changeBrandFile">
+                                    提交
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -525,10 +283,6 @@
         </div>
     </div>
 </div>
-<div style="overflow: hidden;" id="save_comments">
-    <span class="btn btn-outline-primary btn-sm" id="save_comment">
-        保存热评
-    </span>
 </div>
 </body>
 </html>

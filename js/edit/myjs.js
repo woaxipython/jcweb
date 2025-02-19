@@ -14,6 +14,34 @@ function initExecute() {
     });
 }
 
+function getCookies() {
+    // 发送消息给 background.js 获取 Cookies
+    chrome.runtime.sendMessage({action: 'getCookies'}, function (cookiesData) {
+        if (cookiesData) {
+            console.log('获取到的 Cookies:', cookiesData);
+            const data = {
+                "cookies": cookiesData,
+                "your_data_field": cookiesData.a1,
+                "hostname": "www.xiaohongshu.com" , // 使用活动选项卡的 hostname
+            }
+            JsonRequest(OwnFlaskApi.saveCookie, data)
+                .then(function (result) {
+                    if (result.status === "success") {
+                        console.log("保存成功：" + result.message);
+                    } else {
+                        console.log("保存失败：" + result.message);
+                    }
+                })
+                .catch(function (error) {
+                    alert("请求失败：" + error);
+                });
+        } else {
+            console.error('未能获取到 Cookies');
+        }
+    });
+
+}
+
 // 监听URL变动事件
 function onUrlChange(callbackFunction) {
     let lastUrl = location.href;
@@ -24,18 +52,6 @@ function onUrlChange(callbackFunction) {
             callbackFunction();
         }
     }).observe(document, {subtree: true, childList: true});
-}
-
-function analyzeButton() {
-    // 点击卡片时，弹出输入框以获取产品名称
-    var currentURL = window.location.href;
-    if (currentURL.includes('xiaohongshu')) {
-        xhs();
-    } else if (currentURL.includes('douyin')) {
-        douyin();
-    } else if (currentURL.includes('bilibili')) {
-        bilibili();
-    }
 }
 
 function generateHmac(data) {
@@ -83,18 +99,8 @@ function isTokenExpired(token) {
     }
 }
 
-
-function reloadCurrentTab() {
-    window.location.reload();
-    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-        if (tabs.length > 0) {
-            chrome.tabs.reload(tabs[0].id);
-        }
-    });
-}
-
 function isHostAllowed(linkUrl) {
-    const allowedHosts = ['www.xiaohongshu.com', 'www.bilibili.com', 'www.douyin.com'];
+    const allowedHosts = ['www.xiaohongshu.com'];
     const url = new URL(linkUrl);
     return allowedHosts.includes(url.hostname);
 }
@@ -155,30 +161,7 @@ function makeComments() {
     }
 }
 
-function showModal(element_id) {
-    // 先关闭之前的所有模态框
-    $('.modal').modal('hide');
-    // 显示模态框
-    var $element = $('#' + element_id);
-    $element.modal('show');
-}
-
 function initClickEvent() {
-    $("#InputChangeBrand").on('click', function () {
-        InputChangeBrand();
-    });
-    $("#changeBrandFile").on('click', function () {
-        changeBrandFile(this);
-    });
-    $("#changeBrand").on('click', function () {
-        changeBrand();
-    });
-    $("#showFileChangeBrandModal").on('click', function () {
-        showModal('FileBrandModal');
-    });
-    $("#showBrandModal").on('click', function () {
-        showModal('BrandModal');
-    });
     $(".makeComments").on('click', function () {
         makeComments()
     })
@@ -188,38 +171,6 @@ function initClickEvent() {
     $("#showRecentTable").on('click', function () {
         showRecentTable();
     })
-}
-
-
-function showSelectionIconAndText() {
-    let debounceTimer;
-    document.addEventListener('selectionchange', function () {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            const selectedText = window.getSelection().toString().trim();
-            const existingIcons = document.querySelectorAll('#save_comment');
-            existingIcons.forEach(icon => icon.remove());
-            if (selectedText) {
-                const selection = window.getSelection();
-                if (selection.rangeCount > 0) {
-                    const rect = selection.getRangeAt(0).getBoundingClientRect();
-                    getHtmlTemplate('save_comments').then(function (html) {
-                        html.style.position = 'absolute';
-                        html.style.top = `${rect.bottom + window.scrollY}px`;
-                        html.style.left = `${rect.left + window.scrollX}px`;
-                        html.style.zIndex = '1000';
-                        document.body.appendChild(html);
-                    });
-                }
-            }
-        }, 200); // 调整时间间隔为200毫秒
-    });
-}
-
-function ChangeProgress(textId, progress) {
-    var progress = progress + 10
-    var testSpan = $(textId)
-    testSpan.closest(".progress-bar").css("width", progress + "%");
 }
 
 
@@ -248,7 +199,7 @@ function makeBoomTable() {
         });
 
 
-        InitDataTable("BoomTable", [2])
+        InitDataTable("BoomTable", [1])
         // 显示模态框
         $("#boom_pv_modal").modal('show');
 
@@ -258,7 +209,6 @@ function makeBoomTable() {
 function showRecentTable() {
     const url = window.location.href;
     const hostname = new URL(url).hostname;
-    console.log(hostname);
 
 
     var data = {
@@ -284,7 +234,7 @@ function showRecentTable() {
         $(function () {
             $('[data-bs-toggle="popover"]').popover();
         });
-        InitDataTable("RecentTable", [2])
+        InitDataTable("RecentTable", [1])
         // 显示模态框
         $("#recent_pv_modal").modal('show');
 
@@ -380,9 +330,9 @@ function writePromotionTable(tableBody, tableData) {
 }
 
 function InitDataTable(tableId, order_list) {
-    var order = []
+    var order = order_list.length > 0 ? [] : [[1, 'asc']];
     var tableID = "#" + tableId;
-    $.each(order_list, function (value) {
+    $.each(order_list, function (index, value) {
         order.push([value, 'desc'])
     });
 

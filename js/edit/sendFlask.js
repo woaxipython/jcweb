@@ -107,39 +107,6 @@ function saveComment(linkLists, cookies, hostname) {
         });
 }
 
-function saveSuggestKeyWord(linkUrl) {
-    const url = new URL(linkUrl);
-    const hostname = url.hostname;
-    // 获取api
-    getChromeStorageValues(["user_name"], function (result) {
-        const userName = result.user_name;
-        if (!userName) {
-            console.log("没有登录，不能保存关联词")
-            return;
-        }
-        const api = OwnFlaskApi.saveSuggestKeyWord;
-        observeSugContainer(function (text_list) {
-
-            const data = {
-                "text_list": text_list,
-                "your_data_field": api,
-                "userName": userName,
-                "hostname": hostname
-            }
-            JsonRequest(api, data)
-                .then(function (result) {
-                    console.log(result.message);
-                })
-                .catch(function (error) {
-                    alert(error);
-                });
-        });
-
-
-    });
-
-}
-
 
 function FetchGetRequest(url) {
     return GetRequestWithoutApi(url)
@@ -152,18 +119,17 @@ function FetchGetRequest(url) {
         });
 }
 
-function FetchExeData() {
+function FetchAccountPromotionData(account_url) {
     return new Promise((resolve, reject) => {
         getChromeStorageValues(["user_name"], function (result) {
             const userName = result.user_name;
             if (!userName) {
-                console.log("没有登录，不能保存关联词");
                 reject("没有登录");
                 return;
             }
-            const api = OwnFlaskApi.getExeData;
+            const api = OwnFlaskApi.AccountPromotionData;
             const data = {
-                "username": userName,
+                "account_url": account_url,
                 "your_data_field": api,
             };
             JsonRequest(api, data)
@@ -176,23 +142,6 @@ function FetchExeData() {
                 });
         });
     });
-}
-
-function saveHotComment(comment, user_name) {
-    const api = OwnFlaskApi.saveHotComment;
-    const data = {
-        "comment": comment,
-        "user_name": user_name,
-        "your_data_field": api,
-    };
-    JsonRequest(api, data)
-        .then(function (result) {
-            alert(result.message);
-        })
-        .catch(function (error) {
-            alert(error);
-        });
-
 }
 
 function GetAiComment(article, comment, keyword = "万明") {
