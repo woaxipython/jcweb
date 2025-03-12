@@ -20,14 +20,14 @@ window.onload = function () {
 function handleBackgroundMessage(request) {
     let productName;
     switch (request.action) {
-        case 'saveLinkCom':
-            productName = prompt("请输入产品名称", "");
-            makeLink(productName, request.linkUrl, request.cookiesData, true, false);
-            break;
-        case 'saveLinkComComment':
-            productName = prompt("请输入产品名称", "");
-            makeLink(productName, request.linkUrl, request.cookiesData, true, true);
-            break;
+        // case 'saveLinkCom':
+        //     productName = prompt("请输入产品名称", "");
+        //     makeLink(productName, request.linkUrl, request.cookiesData, true, false);
+        //     break;
+        // case 'saveLinkComComment':
+        //     productName = prompt("请输入产品名称", "");
+        //     makeLink(productName, request.linkUrl, request.cookiesData, true, true);
+        //     break;
         case 'saveLinkOwn':
             productName = prompt("请输入产品名称", "");
             makeLink(productName, request.linkUrl, request.cookiesData, false, false);
@@ -36,10 +36,10 @@ function handleBackgroundMessage(request) {
             productName = prompt("请输入产品名称", "");
             makeLink(productName, request.linkUrl, request.cookiesData, false, true);
             break;
-        case 'saveHasSetTop':
-            productName = prompt("请输入产品名称", "");
-            makeLink(productName, request.linkUrl, request.cookiesData, false, false,true);
-            break;
+        // case 'saveHasSetTop':
+        //     productName = prompt("请输入产品名称", "");
+        //     makeLink(productName, request.linkUrl, request.cookiesData, false, false,true);
+        //     break;
         default:
             console.warn(`Unhandled action: ${request.action}`);
     }
