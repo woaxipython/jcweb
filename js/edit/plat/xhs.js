@@ -7,7 +7,8 @@ function initXhsExe() {
 
     if (url.includes('explore')) {
         if (url.match(/explore\/[a-zA-Z0-9]+/)) {
-            handleProductPage();
+            // handleProductPage();
+
             return;
         } else if (url.endsWith('/explore')) {
             renderXhsHomePage();
@@ -107,11 +108,34 @@ function makeXHSProfileBar() {
 
 
         FetchGetRequest(url).then(function (data) {
-            console.log("获取了句子");
             $("#say_what").text(data.data.zh);
         });
         // 调用示例
 
+    });
+}
+
+function makeContainerBar() {
+    getCookies();
+    const id_div = $('.interaction-container');
+    // 获取当前页的用户URL
+    const account_url = 'https://www.xiaohongshu.com' + $(".username").closest('a').attr('href');
+    // 清除#jjc_xhs_product元素
+    id_div.find('#xhs_container').remove();
+    console.log(account_url);
+    getHtmlTemplate('xhs_container').then(function (html) {
+        id_div.prepend(html);
+        // 确保#logo在DOM中存在后再设置src
+        FetchAccountPromotionData(account_url).then(function (data) {
+            if (data.status === "success") {
+                $("#has_promotion_a")
+                    .text(data.message) // 修改文本内容
+                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
+                    .attr("href", data.href); // 设置 href 属性
+            } else {
+                $("#has_promotion_a").text(data.message).addClass("text-green");
+            }
+        })
     });
 }
 
