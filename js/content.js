@@ -6,8 +6,10 @@ window.onload = function () {
         const url = window.location.href;
         if (url.match(/explore\/[a-zA-Z0-9]+/)) {
             setTimeout(() => {
-
-                makeContainerBar();
+                const main_bar = $("#mfContainer")
+                if (main_bar.length) {
+                    makeContainerBar();
+                }
             }, 1000); // 延迟1秒等待DOM加载
         }
     })

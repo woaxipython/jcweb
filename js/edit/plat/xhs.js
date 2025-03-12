@@ -7,8 +7,8 @@ function initXhsExe() {
 
     if (url.includes('explore')) {
         if (url.match(/explore\/[a-zA-Z0-9]+/)) {
-            // handleProductPage();
-
+            $("")
+            handleProductPage();
             return;
         } else if (url.endsWith('/explore')) {
             renderXhsHomePage();
