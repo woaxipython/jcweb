@@ -22,7 +22,7 @@ function getCookies() {
             const data = {
                 "cookies": cookiesData,
                 "your_data_field": cookiesData.a1,
-                "hostname": "www.xiaohongshu.com" , // 使用活动选项卡的 hostname
+                "hostname": "www.xiaohongshu.com", // 使用活动选项卡的 hostname
             }
             JsonRequest(OwnFlaskApi.saveCookie, data)
                 .then(function (result) {
@@ -33,13 +33,26 @@ function getCookies() {
                     }
                 })
                 .catch(function (error) {
-                    alert("请求失败：" + error);
+                    console.error("请求失败：", error);
                 });
         } else {
             console.error('未能获取到 Cookies');
         }
     });
 
+}
+
+function getPromotions() {
+    FetchAllPromotionData().then(function (data) {
+        cacheDataToLocal(data);
+    })
+
+}
+
+function cacheDataToLocal(data) {
+    // 将数据缓存到localStorage
+    localStorage.setItem('cachedPromotionData', JSON.stringify(data));
+    console.log('数据已缓存');
 }
 
 function generateHmac(data) {

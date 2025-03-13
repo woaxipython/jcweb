@@ -2,15 +2,9 @@ function createContextMenuItems(login = false) {
     const documentUrlPatterns = [
         "*://*.xiaohongshu.com/*",
         "*://*.xiaohongshu.cn/*",
-        "*://*.bilibili.com/*",
-        "*://*.bilibili.cn/*",
-        "*://*.douyin.cn/*"
     ];
 
     const menuItems = login ? [
-        // {id: "saveHasSetTop", title: "真人置顶"},
-        // {id: "saveLinkCom", title: "保存竞品"},
-        // {id: "saveLinkComComment", title: "保存竞品-已维护"},
         {id: "saveLinkOwn", title: "保存自发"},
         {id: "saveLinkOwnComment", title: "保存自发-已维护"}
     ] : [
@@ -59,9 +53,6 @@ updateContextMenu();
 // 处理菜单点击事件的本地函数
 function handleMenuClick(menuItemId, linkUrl, tabId) {
     const actions = {
-        // "saveHasSetTop": 'saveHasSetTop',
-        // "saveLinkCom": 'saveLinkCom',
-        // "saveLinkComComment": 'saveLinkComComment',
         "saveLinkOwn": 'saveLinkOwn',
         "saveLinkOwnComment": 'saveLinkOwnComment'
     };

@@ -1,6 +1,6 @@
 const baseUrls = {
-    remote: "https://wanming.site",
-    // remote: "http://127.0.0.1:5000",
+    // remote: "https://wanming.site",
+    remote: "http://127.0.0.1:5000",
 };
 const OuterApi = {
     "lizhi": 'https://api.vvhan.com/api/dailyEnglish?type=sj'
@@ -23,5 +23,6 @@ const OwnFlaskApi = {
     saveHotComment: `${baseUrls.remote}/web_exe_api/save_hot_comment`,
 
     AccountPromotionData: `${baseUrls.remote}/web_exe_api/account_promotion_data`,
+    AllPromotionData: `${baseUrls.remote}/web_exe_api/all_promotion_data`,
 
 };

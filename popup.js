@@ -1,30 +1,4 @@
 $(document).ready(function () {
-    $('#getCookiesButton').click(function () {
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            var activeTab = tabs[0];
-            var url = new URL(activeTab.url);
-            var hostname = url.hostname;
-
-            getSpecificCookiesForActiveTab(function (cookiesData) {
-                const data = {
-                    "cookies": cookiesData,
-                    "your_data_field": cookiesData.a1,
-                    "hostname": hostname, // 使用活动选项卡的 hostname
-                }
-                JsonRequest(OwnFlaskApi.saveCookie, data)
-                    .then(function (result) {
-                        if (result.status === "success") {
-                            alert("保存成功：" + result.message);
-                        } else {
-                            alert("保存失败：" + result.message);
-                        }
-                    })
-                    .catch(function (error) {
-                        alert("请求失败：" + error);
-                    });
-            });
-        });
-    });
 
 
     $("#loginExeButton").on("click", function () {

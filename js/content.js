@@ -3,24 +3,53 @@ window.onload = function () {
     // 初始化执行函数
     initExecute();
     onUrlChange(() => {
-        const url = window.location.href;
-        if (url.match(/explore\/[a-zA-Z0-9]+/)) {
-            setTimeout(() => {
-                const main_bar = $("#mfContainer")
-                if (main_bar.length) {
-                    makeContainerBar();
+        getChromeStorageValues(['token'], function (result) {
+            var token = result.token;
+            // 调用函数以启用功能
+            if (isTokenExpired(token)) {
+                const url = window.location.href;
+                if (url.includes('explore/')) {
+                    setTimeout(() => {
+                        const main_bar = $("#mfContainer")
+                        const user_container_bar = $("#userPostedFeeds");
+                        if (main_bar.length) {
+                            makeContainerBar();
+                        } else if (user_container_bar.length) {
+                            console.log("用户页面,跳空");
+                            // makeUserContainerBar();
+                        } else {
+                            handleProductPage();
+                        }
+                    }, 100); // 延迟1秒等待DOM加载
                 }
-            }, 1000); // 延迟1秒等待DOM加载
-        }
+            }
+        })
     })
-
-    // 监听来自背景脚本的消息
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        console.log(request);
         handleBackgroundMessage(request);
     });
 
-
 };
+window.addEventListener('load', () => {
+    getCookieAlarm();
+});
+
+function getCookieAlarm() {
+    const interval = 5; // 定时任务间隔时间，单位为分钟
+    setInterval(() => {
+        getCookies();
+        // 在这里编写定时任务的逻辑
+    }, 1000 * 60 * interval);
+}
+
+function getPromotionsAlarm() {
+    const interval = 30; // 定时任务间隔时间，单位为分钟
+    setInterval(() => {
+        getPromotions();
+        // 在这里编写定时任务的逻辑
+    }, 1000 * 60 * interval);
+}
 
 // 监听URL变动事件
 function onUrlChange(callbackFunction) {
@@ -34,6 +63,7 @@ function onUrlChange(callbackFunction) {
     }).observe(document, {subtree: true, childList: true});
 }
 
+
 function handleBackgroundMessage(request) {
     let productName;
     switch (request.action) {
@@ -46,6 +76,6 @@ function handleBackgroundMessage(request) {
             makeLink(productName, request.linkUrl, request.cookiesData, false, true);
             break;
         default:
-            console.warn(`Unhandled action: ${request.action}`);
+            getCookies();
     }
 }

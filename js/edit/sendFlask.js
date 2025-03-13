@@ -48,6 +48,7 @@ function reloadCurrentTab() {
 
 function showError(error) {
     alert(`错误：${error}`);
+
 }
 
 
@@ -75,7 +76,8 @@ function saveLink(linkLists, cookies, hostname) {
             }
         })
         .catch(function (error) {
-            alert(error);
+            // alert(error);
+            console.error(error);
         });
 }
 
@@ -109,8 +111,31 @@ function FetchAccountPromotionData(account_url) {
                     resolve(result); // 返回数据
                 })
                 .catch(function (error) {
-                    alert(error);
-                    reject(error);
+                    // alert(error);
+                    console.error(error);
+                });
+        });
+    });
+}
+
+function FetchAllPromotionData() {
+    return new Promise((resolve, reject) => {
+        getChromeStorageValues(["user_name"], function (result) {
+            const userName = result.user_name;
+            if (!userName) {
+                reject("没有登录");
+                return;
+            }
+            const api = OwnFlaskApi.AllPromotionData;
+            const data = {
+                "your_data_field": api,
+            };
+            JsonRequest(api, data)
+                .then(function (result) {
+                    resolve(result); // 返回数据
+                })
+                .catch(function (error) {
+                    console.error(error);
                 });
         });
     });
@@ -135,7 +160,7 @@ function GetAiComment(article, comment, keyword = "万明") {
             }
         })
         .catch(function (error) {
-            alert(error);
+            console.error(error);
         });
 
 }

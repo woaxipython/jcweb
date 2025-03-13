@@ -5,6 +5,7 @@
   "description": "在小红书、抖音、B站、快手等平台为PR提供约合帮助的工具",
   "permissions": [
     "webRequest",
+    "alarms",
     "storage",
     "contextMenus",
     "activeTab",
@@ -55,7 +56,6 @@
       "js": [
         "js/plugin/jquery.min.js",
         "js/plugin/tabler.min.js",
-        "js/plugin/xlsx.full.min.js",
         "js/plugin/datatables.min.js",
         "js/content.js",
         "js/plugin/jsrsasign-all-min.js",
@@ -66,8 +66,7 @@
         "js/edit/plat/bili.js",
         "js/edit/cardHtml.js",
         "js/edit/RequestAjax.js",
-        "js/edit/API.js",
-        "js/edit/DomFunction.js"
+        "js/edit/API.js"
       ],
       "css": [
         "css/plugin/bootstrap.min.css",
