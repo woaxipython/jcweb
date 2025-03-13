@@ -1,6 +1,4 @@
 $(document).ready(function () {
-
-
     $("#loginExeButton").on("click", function () {
         $("body").css({
             "width": "500px",
@@ -70,30 +68,6 @@ $(document).ready(function () {
             }
         }
     });
-
-    function getSpecificCookiesForActiveTab(callback) {
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            if (tabs.length === 0) return; // 如果没有活动标签，则返回
-            const tab = tabs[0];
-            const url = new URL(tab.url);
-
-            // 获取特定的cookie
-            const cookieNames = ['a1', 'web_session'];
-            let cookiesData = {};
-
-            cookieNames.forEach(function (name) {
-                chrome.cookies.get({url: url.origin, name: name}, function (cookie) {
-                    if (cookie) {
-                        cookiesData[name] = cookie.value;
-                    }
-                    // 检查是否已获取所有指定cookie
-                    if (Object.keys(cookiesData).length === cookieNames.length) {
-                        callback(cookiesData);
-                    }
-                });
-            });
-        });
-    }
 
 });
 

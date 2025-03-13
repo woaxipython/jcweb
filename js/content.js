@@ -20,7 +20,7 @@ window.onload = function () {
                         } else {
                             handleProductPage();
                         }
-                    }, 100); // 延迟1秒等待DOM加载
+                    }, 500); // 延迟1秒等待DOM加载
                 }
             }
         })
@@ -39,14 +39,6 @@ function getCookieAlarm() {
     const interval = 5; // 定时任务间隔时间，单位为分钟
     setInterval(() => {
         getCookies();
-        // 在这里编写定时任务的逻辑
-    }, 1000 * 60 * interval);
-}
-
-function getPromotionsAlarm() {
-    const interval = 30; // 定时任务间隔时间，单位为分钟
-    setInterval(() => {
-        getPromotions();
         // 在这里编写定时任务的逻辑
     }, 1000 * 60 * interval);
 }

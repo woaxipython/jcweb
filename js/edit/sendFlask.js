@@ -118,29 +118,6 @@ function FetchAccountPromotionData(account_url) {
     });
 }
 
-function FetchAllPromotionData() {
-    return new Promise((resolve, reject) => {
-        getChromeStorageValues(["user_name"], function (result) {
-            const userName = result.user_name;
-            if (!userName) {
-                reject("没有登录");
-                return;
-            }
-            const api = OwnFlaskApi.AllPromotionData;
-            const data = {
-                "your_data_field": api,
-            };
-            JsonRequest(api, data)
-                .then(function (result) {
-                    resolve(result); // 返回数据
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        });
-    });
-}
-
 function GetAiComment(article, comment, keyword = "万明") {
     // 获取api
     const api = OwnFlaskApi.makeAIComment;

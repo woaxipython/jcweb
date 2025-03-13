@@ -42,19 +42,6 @@ function getCookies() {
 
 }
 
-function getPromotions() {
-    FetchAllPromotionData().then(function (data) {
-        cacheDataToLocal(data);
-    })
-
-}
-
-function cacheDataToLocal(data) {
-    // 将数据缓存到localStorage
-    localStorage.setItem('cachedPromotionData', JSON.stringify(data));
-    console.log('数据已缓存');
-}
-
 function generateHmac(data) {
     const encoder = new TextEncoder();
     const keyData = encoder.encode(123456);
@@ -88,14 +75,14 @@ function isTokenExpired(token) {
         var currentTime = Math.floor(Date.now() / 1000);
         // 判断令牌是否过期,过期返回false
         if (payloadObj.exp > currentTime) {
-            console.log("Token is expired");
+            // console.log("Token is expired");
             return true;
         } else {
-            console.log("Token is valid");
+            // console.log("Token is valid");
             return false;
         }
     } catch (e) {
-        console.error("Invalid token", e);
+        // console.error("Invalid token", e);
         return true;
     }
 }
