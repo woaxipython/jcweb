@@ -42,18 +42,6 @@ function getCookies() {
 
 }
 
-// 监听URL变动事件
-function onUrlChange(callbackFunction) {
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-        const currentUrl = location.href;
-        if (currentUrl !== lastUrl) {
-            lastUrl = currentUrl;
-            callbackFunction();
-        }
-    }).observe(document, {subtree: true, childList: true});
-}
-
 function generateHmac(data) {
     const encoder = new TextEncoder();
     const keyData = encoder.encode(123456);
@@ -149,21 +137,9 @@ function getChromeStorageValues(keys, callback) {
     });
 }
 
-function makeComments() {
-// 获取当前页链接
-    var currentURL = window.location.href;
-    if (currentURL.includes('xiaohongshu')) {
-        make_xhs_comments();
-    } else if (currentURL.includes('douyin')) {
-        make_xhs_comments();
-    } else if (currentURL.includes('bilibili')) {
-        make_xhs_comments();
-    }
-}
-
 function initClickEvent() {
     $(".makeComments").on('click', function () {
-        makeComments()
+        make_xhs_comments();
     })
     $("#showBoomTable").on('click', function () {
         makeBoomTable();

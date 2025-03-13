@@ -1,7 +1,7 @@
 function initXhsExe() {
     const url = window.location.href;
     if (url.includes('search_result')) {
-        renderXhsHomePage();
+        makeXhsBar();
         return;
     }
 
@@ -11,10 +11,10 @@ function initXhsExe() {
             handleProductPage();
             return;
         } else if (url.endsWith('/explore')) {
-            renderXhsHomePage();
+            makeXhsBar();
             return;
         } else if (url.includes('channel_type')) {
-            renderXhsHomePage();
+            makeXhsBar();
             return;
         }
     }
@@ -37,11 +37,6 @@ function handleProfilePage() {
     if (!container.find('#jjc_app').length) {
         container.after(makeXHSUserCard());
     }
-}
-
-
-function renderXhsHomePage() {
-    makeXhsBar();
 }
 
 function makeXhsBar() {

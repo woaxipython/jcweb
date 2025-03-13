@@ -79,34 +79,6 @@ function saveLink(linkLists, cookies, hostname) {
         });
 }
 
-function saveComment(linkLists, cookies, hostname) {
-    // 获取api
-    const api = OwnFlaskApi.saveComment;
-    const data = {
-        "links": linkLists,
-        "your_data_field": api,
-        "cookies": {
-            "a1": cookies.a1,
-            "web_session": cookies.web_session,
-        },
-        "hostname": hostname,
-
-    };
-    // 获取a1
-    // 将cookie信息发送到服务器
-    JsonRequest(api, data)
-        .then(function (result) {
-            if (result.status === "success") {
-                alert("保存成功：" + result.message);
-            } else {
-                alert("保存失败：" + result.message);
-            }
-        })
-        .catch(function (error) {
-            alert(error);
-        });
-}
-
 
 function FetchGetRequest(url) {
     return GetRequestWithoutApi(url)

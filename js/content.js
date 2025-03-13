@@ -22,6 +22,18 @@ window.onload = function () {
 
 };
 
+// 监听URL变动事件
+function onUrlChange(callbackFunction) {
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+        const currentUrl = location.href;
+        if (currentUrl !== lastUrl) {
+            lastUrl = currentUrl;
+            callbackFunction();
+        }
+    }).observe(document, {subtree: true, childList: true});
+}
+
 function handleBackgroundMessage(request) {
     let productName;
     switch (request.action) {
