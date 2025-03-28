@@ -57,6 +57,7 @@
         "js/plugin/jquery.min.js",
         "js/plugin/tabler.min.js",
         "js/plugin/datatables.min.js",
+        "js/plugin/axios.min.js",
         "js/content.js",
         "js/plugin/jsrsasign-all-min.js",
         "js/edit/sendFlask.js",

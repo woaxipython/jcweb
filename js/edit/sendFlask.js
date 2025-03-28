@@ -93,6 +93,17 @@ function FetchGetRequest(url) {
         });
 }
 
+function getXHSrefreshData(){
+    return GetRequest(OwnFlaskApi.getXHSRefreshData)
+       .then(function (data) {
+            return data; // 返回数据
+        })
+       .catch(function (error) {
+            console.error(error);
+            throw error; // 抛出错误以便调用者处理
+        });
+}
+
 function FetchAccountPromotionData(account_url) {
     return new Promise((resolve, reject) => {
         getChromeStorageValues(["user_name"], function (result) {

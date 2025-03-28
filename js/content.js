@@ -26,13 +26,13 @@ window.onload = function () {
         })
     })
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        console.log(request);
         handleBackgroundMessage(request);
     });
 
 };
 window.addEventListener('load', () => {
     getCookieAlarm();
+    refreshXHSPromotionData();
 });
 
 function getCookieAlarm() {

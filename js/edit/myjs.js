@@ -18,7 +18,6 @@ function getCookies() {
     // 发送消息给 background.js 获取 Cookies
     chrome.runtime.sendMessage({action: 'getCookies'}, function (cookiesData) {
         if (cookiesData) {
-            console.log('获取到的 Cookies:', cookiesData);
             const data = {
                 "cookies": cookiesData,
                 "your_data_field": cookiesData.a1,
@@ -41,6 +40,15 @@ function getCookies() {
     });
 
 }
+
+async function refreshXHSPromotionData() {
+    const data = await getXHSrefreshData();
+    const feed = data.feed;
+    const headers = data.headers;
+    const requestData = data.data;
+    XhsPromotionRequest(feed, headers, requestData);
+}
+
 
 function generateHmac(data) {
     const encoder = new TextEncoder();

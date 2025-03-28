@@ -30,6 +30,22 @@ function JsonRequest(url, data) {
     });
 }
 
+function GetRequest(url) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (response) {
+                // 请求成功回调处理
+                resolve(response);
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        });
+    });
+}
+
 function GetRequestWithoutApi(url) {
     return new Promise(function (resolve, reject) {
         $.ajax({
