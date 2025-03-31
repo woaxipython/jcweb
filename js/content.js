@@ -32,7 +32,6 @@ window.onload = function () {
 };
 window.addEventListener('load', () => {
     getCookieAlarm();
-    refreshXHSPromotionData();
 });
 
 function getCookieAlarm() {
