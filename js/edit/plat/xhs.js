@@ -30,14 +30,7 @@ function handleProfilePage() {
         container.after(html);
         // 确保#logo在DOM中存在后再设置src
         FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
+            $('#has_promotion_a').html(data.message)
         })
     });
 }
@@ -91,14 +84,7 @@ function makeXHSProfileBar() {
         });
 
         FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
+            $('#has_promotion_a').html(data.message)
         })
 
         var url = OuterApi.lizhi;
@@ -122,14 +108,7 @@ function makeContainerBar() {
         id_div.prepend(html);
         // 确保#logo在DOM中存在后再设置src
         FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
+            $('#has_promotion_a').html(data.message)
         })
     });
 }
