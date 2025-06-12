@@ -30,14 +30,7 @@ function handleProfilePage() {
         container.after(html);
         // 确保#logo在DOM中存在后再设置src
         FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
+            $('#has_promotion_a').html(data.message)
         })
     });
 }
@@ -91,14 +84,7 @@ function makeXHSProfileBar() {
         });
 
         FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
+            $('#has_promotion_a').html(data.message)
         })
 
         var url = OuterApi.lizhi;
@@ -122,51 +108,15 @@ function makeContainerBar() {
         id_div.prepend(html);
         // 确保#logo在DOM中存在后再设置src
         FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
+            $('#has_promotion_a').html(data.message)
         })
     });
 }
 
-function makeUserContainerBar() {
-    getCookies();
-    const id_div = $('.interaction-container');
-    // 获取当前页的用户URL
-    const account_url = 'https://www.xiaohongshu.com' + $(".username").closest('a').attr('href');
-    // 清除#jjc_xhs_product元素
-    id_div.find('#xhs_container').remove();
-    getHtmlTemplate('xhs_container').then(function (html) {
-        id_div.prepend(html);
-        // 确保#logo在DOM中存在后再设置src
-        FetchAccountPromotionData(account_url).then(function (data) {
-            if (data.status === "success") {
-                $("#has_promotion_a")
-                    .text(data.message) // 修改文本内容
-                    .addClass("text-danger") // 添加 Bootstrap 的 `text-danger` 类
-                    .attr("href", data.href); // 设置 href 属性
-            } else {
-                $("#has_promotion_a").text(data.message).addClass("text-green");
-            }
-        })
+async function XhsPromotionRequest(feed, headers, requestData) {
+    return new Promise(function dispatchXhrRequest(resolve, reject) {
+        //     第一步，先获取v,g,其中v = requestData
     });
 }
 
 
-function make_xhs_comments() {
-    var title = $('<title>').text($('#detail-title').text());
-    var content = $('<content>').text($("#detail-desc").text());
-    var article = $('<article>').append(title).append(content).prop('outerHTML');
-
-    var commentTexts = $('.comment-inner-container .content').map(function () {
-        return $(this).text();
-    }).get().join(' ');
-    var comment = $('<comment>').text(commentTexts).prop('outerHTML');
-    var key_word = $('select[name="InsertKeyWord"] option:selected').val();
-    GetAiComment(article, comment, key_word);
-}

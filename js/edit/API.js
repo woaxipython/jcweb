@@ -25,4 +25,6 @@ const OwnFlaskApi = {
     AccountPromotionData: `${baseUrls.remote}/web_exe_api/account_promotion_data`,
     AllPromotionData: `${baseUrls.remote}/web_exe_api/all_promotion_data`,
 
+    getXHSRefreshData: `${baseUrls.remote}/web_exe_api/getXHSRefreshData`,
+
 };
