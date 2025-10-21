@@ -55,9 +55,6 @@ function makeXhsBar() {
             });
             var url = OuterApi.lizhi;
             initClickEvent();
-            FetchGetRequest(url).then(function (data) {
-                $("#say_what").text(data.data.zh + "\n" + data.data.en);
-            });
         });
     }
 }
@@ -66,8 +63,10 @@ function makeXhsBar() {
 function makeXHSProfileBar() {
     // getCookies();
     const id_div = $('.interaction-container');
+    console.log("测试")
     // 获取当前页的用户URL
     const account_url = 'https://www.xiaohongshu.com' + $(".username").closest('a').attr('href');
+
     // 清除#jjc_xhs_product元素
     id_div.find('#jjc_xhs_product').remove();
 
@@ -89,9 +88,6 @@ function makeXHSProfileBar() {
 
         var url = OuterApi.lizhi;
         initClickEvent();
-        FetchGetRequest(url).then(function (data) {
-            $("#say_what").text(data.data.zh);
-        });
         // 调用示例
 
     });

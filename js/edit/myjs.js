@@ -146,14 +146,8 @@ function getChromeStorageValues(keys, callback) {
 }
 
 function initClickEvent() {
-    $(".makeComments").on('click', function () {
-        make_xhs_comments();
-    })
     $("#showBoomTable").on('click', function () {
         makeBoomTable();
-    })
-    $("#showRecentTable").on('click', function () {
-        showRecentTable();
     })
 }
 

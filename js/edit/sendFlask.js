@@ -82,17 +82,6 @@ function saveLink(linkLists, cookies, hostname) {
 }
 
 
-function FetchGetRequest(url) {
-    return GetRequestWithoutApi(url)
-        .then(function (data) {
-            return data; // 返回数据
-        })
-        .catch(function (error) {
-            console.error(error);
-            throw error; // 抛出错误以便调用者处理
-        });
-}
-
 function getXHSrefreshData(){
     return GetRequest(OwnFlaskApi.getXHSRefreshData)
        .then(function (data) {
@@ -127,28 +116,4 @@ function FetchAccountPromotionData(account_url) {
                 });
         });
     });
-}
-
-function GetAiComment(article, comment, keyword = "万明") {
-    // 获取api
-    const api = OwnFlaskApi.makeAIComment;
-    const data = {
-        "article": article,
-        "comment": comment,
-        "keyword": $('<keyword>').text(keyword).prop('outerHTML'),
-        "your_data_field": api,
-    };
-    JsonRequest(api, data)
-        .then(function (result) {
-            if (result.status === "success") {
-                var message = result.message;
-                alert(message);
-            } else {
-                alert(result.message);
-            }
-        })
-        .catch(function (error) {
-            console.error(error);
-        });
-
 }
