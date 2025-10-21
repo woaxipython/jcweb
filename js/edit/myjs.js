@@ -41,14 +41,6 @@ function getCookies() {
 
 }
 
-async function refreshXHSPromotionData() {
-    const data = await getXHSrefreshData();
-    const feed = data.feed;
-    const headers = data.headers;
-    const requestData = data.data;
-    XhsPromotionRequest(feed, headers, requestData);
-}
-
 
 function generateHmac(data) {
     const encoder = new TextEncoder();

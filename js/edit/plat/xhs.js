@@ -53,7 +53,6 @@ function makeXhsBar() {
                     $("#user_name").text(userName);
                 }
             });
-            var url = OuterApi.lizhi;
             initClickEvent();
         });
     }
@@ -86,7 +85,6 @@ function makeXHSProfileBar() {
             $('#has_promotion_a').html(data.message)
         })
 
-        var url = OuterApi.lizhi;
         initClickEvent();
         // 调用示例
 
