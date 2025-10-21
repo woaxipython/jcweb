@@ -176,41 +176,6 @@ function makeBoomTable() {
     });
 }
 
-function showRecentTable() {
-    const url = window.location.href;
-    const hostname = new URL(url).hostname;
-
-
-    var data = {
-        'your_data_field': OwnFlaskApi.RecentTable,
-        'hostname': hostname
-    }
-    JsonRequest(OwnFlaskApi.RecentTable, data).then(function (data) {
-// 假设 data.data 是一个数组，每个元素都是一个对象
-        let tableData;
-        try {
-            tableData = JSON.parse(data.data);
-        } catch (e) {
-            console.error("解析 JSON 失败:", e);
-            return;
-        }
-        const tableBody = $("#RecentTable tbody");
-
-        // 清空当前表格内容
-        tableBody.empty();
-        writePromotionTable(tableBody, tableData);
-
-        // 初始化所有的 popover
-        $(function () {
-            $('[data-bs-toggle="popover"]').popover();
-        });
-        InitDataTable("RecentTable", [1])
-        // 显示模态框
-        $("#recent_pv_modal").modal('show');
-
-    });
-}
-
 function writePromotionTable(tableBody, tableData) {
     // 遍历数据并生成表格行
     tableData.forEach(function (rowData) {

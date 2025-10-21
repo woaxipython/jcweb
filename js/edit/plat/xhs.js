@@ -107,10 +107,3 @@ function makeContainerBar() {
     });
 }
 
-async function XhsPromotionRequest(feed, headers, requestData) {
-    return new Promise(function dispatchXhrRequest(resolve, reject) {
-        //     第一步，先获取v,g,其中v = requestData
-    });
-}
-
-
